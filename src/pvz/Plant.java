@@ -9,6 +9,6 @@ package pvz;
  * @author Bella Buyco
  */
 public abstract class Plant {
-    int HP;
-    int sunCost;
+    protected int HP;
+    protected int sunCost;
 }

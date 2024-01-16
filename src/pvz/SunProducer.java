@@ -8,10 +8,14 @@ package pvz;
  *
  * @author Bella Buyco
  */
+import java.util.Timer;
+import java.util.TimerTask;  
+
 public class SunProducer extends Plant{
-    int chargeUp;
+    Timer chargeUp = new Timer();
+    private int timeInterval = 10 * 1000;
     
     public void generateSun(){
-        
+        sun += 50;
     }
 }
