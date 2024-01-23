@@ -10,6 +10,8 @@ package pvz;
  */
 public abstract class Entity {
     protected int speed;
+    protected int xCoord;
+    protected int yCoord;
     
     public Entity(int s){
         speed = s;

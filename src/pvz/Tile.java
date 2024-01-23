@@ -13,8 +13,11 @@ public class Tile {
     public int yCoord;
     
     public Tile(int x, int y){
-        xCoord = x;
-        yCoord = y;
+        Entity[][] tiles = new Entity[8][4]; 
+   }
+    
+    public setEntity(Entity e, int x, int y){
+        
     }
     
 }
