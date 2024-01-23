@@ -11,6 +11,11 @@ package pvz;
 public class Shooter extends Plant{
     String type;
     
+    public Shooter(int h, int c, String t){
+        super(h, c);
+        t = type;
+    }
+    
     public void shoot(){
         //generate a projectile
     }

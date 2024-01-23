@@ -8,10 +8,17 @@ package pvz;
  *
  * @author Bella Buyco
  */
-public class Bomb {
+public class Bomb extends Plant{
     String type;
     int chargeUp;
     boolean active;
+    
+    public Bomb(int h, int c, int u, boolean a, String t){
+        super(h, c);
+        u = chargeUp;
+        a = active;
+        t = type;
+    }
     
     public void explode(){
         // insert code here
