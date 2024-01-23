@@ -6,15 +6,12 @@ package pvz;
 
 /**
  *
- * @author Bella Buyco
+ * @author Lenovo
  */
-public abstract class Plant extends Entity{
-    protected int hp;
-    protected int sunCost;
+public abstract class Entity {
+    protected int speed;
     
-    public Plant(int h, int c){
-        super(0);
-        hp = h;
-        sunCost = c;
+    public Entity(int s){
+        speed = s;
     }
 }
