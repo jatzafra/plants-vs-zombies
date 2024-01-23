@@ -9,15 +9,27 @@ package pvz;
  * @author Lenovo
  */
 public class Tile {
-    public int xCoord;
-    public int yCoord;
+    private int xLength;
+    private int yLength;
+    
+    private Entity[][] tiles;
     
     public Tile(int x, int y){
-        Entity[][] tiles = new Entity[8][4]; 
+        xLength = x;
+        yLength = y;
+        tiles = new Entity[x][y]; 
    }
     
-    public setEntity(Entity e, int x, int y){
-        
+    public void setEntity(Entity e, int x, int y){
+        if(x >= 0 && x <= xLength && y >= 0 && y <= yLength){
+            tiles[x][y] = e;
+        }
+    }
+    public Entity getEntity(int x, int y){
+        if (x >= 0 && x < xLength && y >= 0 && y < yLength) {
+            return tiles[x][y];
+        }
+        return null;
     }
     
 }
