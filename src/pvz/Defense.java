@@ -10,4 +10,7 @@ package pvz;
  */
 public class Defense extends Plant{
     
+    public Defense(int h, int c){
+        super(h, c);
+    }
 }

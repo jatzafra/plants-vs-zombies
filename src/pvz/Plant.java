@@ -11,6 +11,7 @@ package pvz;
 public abstract class Plant extends Entity{
     protected int hp;
     protected int sunCost;
+    protected static int sun = 0;
     
     public Plant(int h, int c){
         super(0);
