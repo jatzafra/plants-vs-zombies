@@ -11,7 +11,7 @@ package pvz;
  
 
 public class SunProducer extends Plant{
-    int sunProduced;
+    private int sunProduced;
     
     public SunProducer(int h, int c){
         super(h, c);
