@@ -15,9 +15,9 @@ public class Bomb extends Plant{
     
     public Bomb(int h, int c, int u, boolean a, String t){
         super(h, c);
-        u = chargeUp;
-        a = active;
-        t = type;
+        chargeUp = u;
+        active = a;
+        type = t;
     }
     
     public void explode(){

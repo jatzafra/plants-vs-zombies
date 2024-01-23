@@ -13,7 +13,7 @@ public class Shooter extends Plant{
     
     public Shooter(int h, int c, String t){
         super(h, c);
-        t = type;
+        type = t;
     }
     
     public void shoot(){
