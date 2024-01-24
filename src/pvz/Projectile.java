@@ -20,7 +20,7 @@ public class Projectile extends Entity {
     }
     
     public void hit(){ //unfinished
-        target = Tile.getEntity(xCoord, yCoord, zCoord);
+        target = Tile.getFirstZombie(xCoord, yCoord);
         if(target==null){
           target.setHP -= atk;
         }
