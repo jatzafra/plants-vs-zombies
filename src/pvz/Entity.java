@@ -10,9 +10,15 @@ package pvz;
  */
 public abstract class Entity {
     protected int speed, xCoord, yCoord, zCoord;
+    protected String id;
     
     public Entity(int s){
         speed = s;
+    }
+    
+    public Entity(int s, String i){
+        speed = s;
+        id = i;
     }
     
     public void setX(int x){
@@ -39,6 +45,9 @@ public abstract class Entity {
     }
     public int getZ(){
         return zCoord;
+    }
+    public String getId(){
+        return id;
     }
     
     public void move() throws GameOverException{

@@ -116,13 +116,13 @@ public class Tile {
         return new ArrayList<>(); //empty ArrayList
     }
     
-    public static void moveAllZombies(){
+    public static void moveAllZombies() throws GameOverException{
         for(int i = zombieList.size() - 1; i >= 0; i--){ /* Iterates through list in reverse order 
                                                             to avoid index-shifting problems */
             zombieList.get(i).move();
         }
     }
-    public static void moveAllProjectiles(){
+    public static void moveAllProjectiles() throws GameOverException{
         for(int i = projectileList.size() - 1; i >= 0; i--){ /* Iterates through list in reverse order 
                                                                 to avoid index-shifting problems */
             projectileList.get(i).move();

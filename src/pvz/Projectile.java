@@ -13,8 +13,8 @@ public class Projectile extends Entity {
     private int atk;
     private Entity target;
     
-    public Projectile(int s, int a, String t){
-        super(s);
+    public Projectile(int s, String i, int a, String t){
+        super(s, i);
         atk = a;
         type = t;
     }
