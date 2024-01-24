@@ -40,4 +40,37 @@ public abstract class Entity {
     public int getZ(){
         return zCoord;
     }
+    
+    public void move() throws GameOverException{
+        if(speed < 0){
+            if(this instanceof Zombie && xCoord == 0){
+                System.out.println("GAMEOVER");
+                throw new GameOverException;
+            }
+            
+            int oldXCoord = xCoord, oldYCoord = yCoord;
+            int newXCoord = xCoord--, newYCoord = yCoord;
+            
+            Tile.removeEntity(this, xCoord, yCoord);
+            Tile.addEntity(this, newXCoord, newYCoord);
+            
+            // Update 'zCoord' values of Entities that shifted downwards due to removal
+            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
+                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
+            }
+            
+        } else if(speed > 0){
+            
+            int oldXCoord = xCoord, oldYCoord = yCoord;
+            int newXCoord = xCoord++, newYCoord = yCoord;
+            
+            Tile.removeEntity(this, xCoord, yCoord);
+            Tile.addEntity(this, newXCoord, newYCoord);
+            
+            // Update 'zCoord' values of Entities that shifted downwards due to removal
+            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
+                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
+            }
+        }
+    }
 }

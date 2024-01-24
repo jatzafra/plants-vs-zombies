@@ -24,6 +24,9 @@ public class Zombie extends Entity {
     public int getHP(){
         return hp;
     }
+    public void setHP(int h){
+        hp = h;
+    }
     
     public void targetPlant(){
         Plant p = Tile.getPlant(xCoord, yCoord);
@@ -38,8 +41,9 @@ public class Zombie extends Entity {
                 target.setHP(target.getHP() - atk);
             }
             else{
-                //target dies
+                //target Plant dies
                 Tile.removeEntity(target, xCoord, yCoord);
+                System.out.println("Zombie " + this + " has eaten Plant "+ target);
             }
         }
     }
