@@ -40,7 +40,7 @@ public class Tile {
         if(x >= 0 && x < xLength && y >= 0 && y < yLength){
             if(Tile.getEntities(x, y) != null && Tile.getEntities(x, y).contains(e)){
                 Tile.getEntities(x, y).remove(e);
-                e.setCoords(-1, -1, -1); //Signifies that Entity e is removed from tileArray entirely
+                e.setCoords(-1, -1, -1); // Signifies that Entity e is removed from tileArray entirely
             }
         }
     }
@@ -55,14 +55,30 @@ public class Tile {
         }
         return null;
     }
-    public static Zombie getZombie(int x, int y){
+    public static Zombie getFirstZombie(int x, int y){ 
         ArrayList<Entity> entities = getEntities(x, y);
         if(entities != null) {
             for(Entity e : entities){
                 if(e instanceof Zombie){
-                    return(Zombie) e;
+                    return (Zombie) e;
+                    // returns first Zombie found in ArrayList
+                    // also Zombie with lowest index in that ArrayList
                 }
             }
+        }
+        return null;
+    }
+    public static ArrayList<Zombie> getAllZombies(int x, int y){ 
+        ArrayList<Entity> entities = getEntities(x, y);
+        ArrayList<Zombie> zombies = null;
+        if(entities != null) {
+            for(Entity e : entities){
+                if(e instanceof Zombie){
+                    zombies.add((Zombie) e);
+                    // returns ArrayList of all Zombies in given tile
+                }
+            }
+            return zombies;
         }
         return null;
     }
