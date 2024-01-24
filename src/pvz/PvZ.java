@@ -29,6 +29,12 @@ public class PvZ {
             peashooter.shoot();
             normal.eatPlant();
         }
+        if(peashooter.getHP() <= 0){
+            Tile.removeEntity(peashooter, peashooter.getX(), peashooter.getY());
+        }
+        else if(normal.getHP() <= 0) {
+            Tile.removeEntity(normal, normal.getX(), normal.getY());
+        }
         
         //Scenario 3
         Defense wallnut = new Defense(3000, 50);
@@ -36,6 +42,9 @@ public class PvZ {
         buckethead.targetPlant();
         while(wallnut.getHP() >= 0){
             buckethead.eatPlant();
+        }
+        if(wallnut.getHP() <= 0){
+            Tile.removeEntity(wallnut, wallnut.getX(), wallnut.getY());
         }
     }
     

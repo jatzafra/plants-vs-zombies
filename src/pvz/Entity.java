@@ -45,7 +45,7 @@ public abstract class Entity {
         if(speed < 0){
             if(this instanceof Zombie && xCoord == 0){
                 System.out.println("GAMEOVER");
-                throw new GameOverException;
+                throw new GameOverException();
             }
             
             int oldXCoord = xCoord, oldYCoord = yCoord;
