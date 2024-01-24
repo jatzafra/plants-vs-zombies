@@ -19,8 +19,8 @@ public class Projectile extends Entity {
         type = t;
     }
     
-    public void hit(){
-        target = Tile.getEntity(this.getxCoord + 1, this.getyCoord);
+    public void hit(){ //unfinished
+        target = Tile.getEntity(xCoord, yCoord, zCoord);
         if(target==null){
           target.setHp -= atk;
         }
