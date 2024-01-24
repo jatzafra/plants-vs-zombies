@@ -30,7 +30,7 @@ public class Projectile extends Entity {
                 //target Zombie dies
                 target.setHP(0);
                 Tile.removeEntity(target, xCoord, yCoord);
-                System.out.println("Projectile " + this + " has killed Zombie "+ target);
+                System.out.println("Projectile has killed Zombie."); //removable
             }
             Tile.removeEntity(this, xCoord, yCoord); //removes Projectile
         }

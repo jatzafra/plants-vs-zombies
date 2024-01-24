@@ -20,19 +20,22 @@ public class PvZ {
         Tile.addEntity(sunflower, 0, 0);
         sunflower.generateSun();
         System.out.println("Sun: " + Plant.getSun());
+        sunflower.generateSun();
+        System.out.println("Sun: " + Plant.getSun());
+        sunflower.generateSun();
+        System.out.println("Sun: " + Plant.getSun());
         System.out.println("scenario 1 end");
         
         //Scenario 2
         Shooter peashooter = new Shooter(350, 100, "straight");
-        Zombie normal = new Zombie("normal", 250, 50, -2);
+        Zombie normal = new Zombie("normal", 50, 50, -2);
         
         Tile.addEntity(peashooter, 3, 3);
         Tile.addEntity(normal, 3, 3);
         
         while(peashooter.getHP() > 0 && normal.getHP() > 0){
             peashooter.shoot();
-            normal.setHP(normal.getHP() - 10);
-            System.out.println("peashooer HP: " + peashooter.getHP());
+            Tile.hitAllProjectiles();
             System.out.println("normal zombie HP: " + normal.getHP());
         }
         System.out.println("scenario 2 end");
