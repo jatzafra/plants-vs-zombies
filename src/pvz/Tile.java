@@ -128,4 +128,10 @@ public class Tile {
             projectileList.get(i).move();
         }
     }
+    public static void hitAllProjectiles(){
+        for(int i = projectileList.size() - 1; i >= 0; i--){ /* Iterates through list in reverse order 
+                                                                to avoid index-shifting problems */
+            projectileList.get(i).hit();
+        }
+    }
 }

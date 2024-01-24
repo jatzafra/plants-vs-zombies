@@ -26,6 +26,7 @@ public class Shooter extends Plant{
         
         Projectile projectile = new Projectile(1, id, 10, type);
         Tile.addEntity(projectile, xCoord, yCoord);
+        System.out.println("Shooter made Projectile."); //removable
     }
     
 }
