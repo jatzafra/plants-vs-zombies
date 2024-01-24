@@ -36,3 +36,4 @@ public class Bomb extends Plant{
             //JULIANNNN pacheck nito this one has an error for me fsr (sa line above)
         }
     } 
+}

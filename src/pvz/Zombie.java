@@ -42,8 +42,9 @@ public class Zombie extends Entity {
             }
             else{
                 //target Plant dies
+                target.setHP(0);
                 Tile.removeEntity(target, xCoord, yCoord);
-                System.out.println("Zombie " + this + " has eaten Plant "+ target);
+                System.out.println("Zombie has eaten plant");
             }
         }
     }
