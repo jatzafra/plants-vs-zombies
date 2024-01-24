@@ -12,7 +12,7 @@ public class Zombie extends Entity {
     private String type;
     private int hp;
     private int atk;
-    private Entity target;
+    private Plant target;
     
     public Zombie(String t, int h, int a, int s){
         super(s);
@@ -22,14 +22,21 @@ public class Zombie extends Entity {
     }
     
     public void targetPlant(){
-        xCoord.getEntity() = target;
-        //julian can u fix this ;-;
+        Plant p = Tile.getPlant(xCoord, yCoord);
+        if(p != null){
+            target = p;
+        }
     }
     
     public void eatPlant(){
-        do{
-            target.getHP() -= atk;
+        if(target != null && target.getHP() > 0){
+            if(target.getHP() > atk){
+                target.setHP(target.getHP() - atk);
+            }
+            else{
+                //target dies
+                Tile.removeEntity(target, xCoord, yCoord);
+            }
         }
-        while(hp >= 0 || target.getHP() >= 0);
     }
 }

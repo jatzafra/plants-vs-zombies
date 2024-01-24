@@ -21,13 +21,20 @@ public abstract class Plant extends Entity{
     
     public int getHP(){
         return hp;
-    }
-    
+    }    
     public int getSunCost(){
         return sunCost;
-    }
-    
+    }    
     public int getSun(){
         return sun;
+    }    
+    public void setHP(int h){
+        hp = h;
+    }    
+    public void setSunCost(int c){
+        sunCost = c;
+    }    
+    public void setSun(int s){
+        sun = s;
     }
 }
