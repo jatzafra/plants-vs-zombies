@@ -13,7 +13,12 @@ package pvz;
 public class SunProducer extends Plant{
     private int sunProduced;
     
-    public SunProducer(int h, int c){
+    public SunProducer(int h, int c, int s){
         super(h, c);
+        sunProduced = s;
+    }
+    
+    public void generateSun(){
+        sun += sunProduced;
     }
 }

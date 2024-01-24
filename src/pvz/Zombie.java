@@ -21,6 +21,10 @@ public class Zombie extends Entity {
         atk = a;
     }
     
+    public int getHP(){
+        return hp;
+    }
+    
     public void targetPlant(){
         Plant p = Tile.getPlant(xCoord, yCoord);
         if(p != null){
