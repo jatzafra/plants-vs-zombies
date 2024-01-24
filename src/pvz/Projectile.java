@@ -19,7 +19,7 @@ public class Projectile extends Entity {
         type = t;
     }
     
-    public void hit(){ //unfinished
+    public void hit(){ 
         Zombie target = Tile.getFirstZombieInTile(xCoord, yCoord);
         
         if(target != null && target.getHP() > 0){
@@ -28,9 +28,11 @@ public class Projectile extends Entity {
             }
             else{
                 //target Zombie dies
+                target.setHP(0);
                 Tile.removeEntity(target, xCoord, yCoord);
                 System.out.println("Projectile " + this + " has killed Zombie "+ target);
             }
+            Tile.removeEntity(this, xCoord, yCoord); //removes Projectile
         }
     }
 }

@@ -25,7 +25,7 @@ public abstract class Plant extends Entity{
     public int getSunCost(){
         return sunCost;
     }    
-    public int getSun(){
+    public static int getSun(){
         return sun;
     }    
     public void setHP(int h){
