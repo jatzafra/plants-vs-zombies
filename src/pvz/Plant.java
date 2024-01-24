@@ -18,4 +18,16 @@ public abstract class Plant extends Entity{
         hp = h;
         sunCost = c;
     }
+    
+    public int getHP(){
+        return hp;
+    }
+    
+    public int getSunCost(){
+        return sunCost;
+    }
+    
+    public int getSun(){
+        return sun;
+    }
 }
