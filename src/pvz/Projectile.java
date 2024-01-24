@@ -22,7 +22,7 @@ public class Projectile extends Entity {
     public void hit(){ //unfinished
         target = Tile.getEntity(xCoord, yCoord, zCoord);
         if(target==null){
-          target.setHp -= atk;
+          target.setHP -= atk;
         }
     }
 }
