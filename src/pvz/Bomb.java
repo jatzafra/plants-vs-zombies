@@ -20,7 +20,13 @@ public class Bomb extends Plant{
         type = t;
     }
     
+    public void activate(){
+        active = true;
+    }
+    
     public void explode(){
-        // insert code here
+        if(active || type == "insta" || (this.getX() + 1).getEntity != null){
+            
+        }
     }
 }

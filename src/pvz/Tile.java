@@ -23,6 +23,7 @@ public class Tile {
     public void setEntity(Entity e, int x, int y){
         if(x >= 0 && x <= xLength && y >= 0 && y <= yLength){
             tiles[x][y] = e;
+            e.setCoords(x, y);
         }
     }
     public Entity getEntity(int x, int y){

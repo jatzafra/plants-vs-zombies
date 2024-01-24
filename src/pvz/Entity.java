@@ -9,9 +9,30 @@ package pvz;
  * @author Lenovo
  */
 public abstract class Entity {
-    protected int speed;
+    protected int speed, xCoord, yCoord;
     
     public Entity(int s){
         speed = s;
+    }
+    
+    public void setX(int x){
+        xCoord = x;
+    }
+    
+    public void setY(int y){
+        yCoord = y;
+    }
+    
+    public void setCoords(int x, int y){
+        xCoord = x;
+        yCoord = y;
+    }
+    
+    public int getX(){
+        return xCoord;
+    }
+    
+    public int getY(){
+        return yCoord;
     }
 }
