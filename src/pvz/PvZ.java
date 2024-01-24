@@ -16,7 +16,7 @@ public class PvZ {
     public static void main(String[] args) {
 
         //Scenario 1
-        SunProducer sunflower = SunProducer(300, 50, 50);
+        SunProducer sunflower = new SunProducer(300, 50, 50);
         sunflower.generateSun();
         
         //Scenario 2
@@ -25,7 +25,7 @@ public class PvZ {
         
         normal.targetPlant();
         
-        while(peashooter.getHP >= 0 || normal.getHP() >= 0){
+        while(peashooter.getHP() >= 0 || normal.getHP() >= 0){
             peashooter.shoot();
             normal.eatPlant();
         }
