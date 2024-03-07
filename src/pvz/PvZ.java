@@ -14,7 +14,7 @@ public class PvZ {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        /*
         //Scenario 1
         SunProducer sunflower = new SunProducer(300, 50, 50);
         Tile.addEntity(sunflower, 0, 0);
@@ -31,11 +31,17 @@ public class PvZ {
         Zombie normal = new Zombie("normal", 50, 50, -2);
         
         Tile.addEntity(peashooter, 3, 3);
-        Tile.addEntity(normal, 3, 3);
+        Tile.addEntity(normal, 6, 3);
         
         while(peashooter.getHP() > 0 && normal.getHP() > 0){
             peashooter.shoot();
             Tile.hitAllProjectiles();
+            Tile.moveAllProjectiles();
+            Tile.hitAllProjectiles();
+            Tile.moveAllZombies();
+            Tile.hitAllProjectiles();
+            
+            System.out.println("normal zombie Coords: " + normal.getX() + ", " + normal.getY());
             System.out.println("normal zombie HP: " + normal.getHP());
         }
         System.out.println("scenario 2 end");
@@ -54,6 +60,7 @@ public class PvZ {
             System.out.println("wallnut HP: " + wallnut.getHP());
         }
         System.out.println("scenario 3 end");
+        */
     }
     
 }
