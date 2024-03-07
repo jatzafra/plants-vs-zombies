@@ -58,7 +58,7 @@ public abstract class Entity {
             }
             
             int oldXCoord = xCoord, oldYCoord = yCoord;
-            int newXCoord = xCoord--, newYCoord = yCoord;
+            int newXCoord = xCoord - 1, newYCoord = yCoord;
             
             Tile.removeEntity(this, xCoord, yCoord);
             Tile.addEntity(this, newXCoord, newYCoord);
@@ -71,7 +71,7 @@ public abstract class Entity {
         } else if(speed > 0){
             
             int oldXCoord = xCoord, oldYCoord = yCoord;
-            int newXCoord = xCoord++, newYCoord = yCoord;
+            int newXCoord = xCoord + 1, newYCoord = yCoord;
             
             Tile.removeEntity(this, xCoord, yCoord);
             Tile.addEntity(this, newXCoord, newYCoord);

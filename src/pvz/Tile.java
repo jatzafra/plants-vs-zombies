@@ -122,6 +122,15 @@ public class Tile {
             zombieList.get(i).move();
         }
     }
+    public static void shootAllShooters(){
+        for(int i = plantList.size() - 1; i >= 0; i--){ 
+            Plant plant = plantList.get(i);
+            if(plant instanceof Shooter){
+                Shooter shooter = (Shooter) plant;
+                shooter.shoot();
+            }
+        }
+    }
     public static void moveAllProjectiles() throws GameOverException{
         for(int i = projectileList.size() - 1; i >= 0; i--){ /* Iterates through list in reverse order 
                                                                 to avoid index-shifting problems */
