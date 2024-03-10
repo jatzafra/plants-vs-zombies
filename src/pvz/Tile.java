@@ -21,8 +21,8 @@ public class Tile {
     
     static{
         tileArray = new ArrayList[Tile.xLength][Tile.yLength];
-        for(int x = 0; x < Tile.xLength; x++){
-            for(int y = 0; y < Tile.yLength; y++){
+        for(int y = 0; y < Tile.yLength; y++){
+            for(int x = 0; x < Tile.xLength; x++){
                 tileArray[x][y] = new ArrayList<>();
             }
         }
