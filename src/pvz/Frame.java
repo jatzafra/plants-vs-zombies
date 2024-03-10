@@ -4,6 +4,9 @@
  */
 package pvz;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -11,13 +14,27 @@ import javax.swing.JFrame;
  * @author Bella Buyco
  */
 public class Frame extends JFrame {
+    
+    MenuPanel menuPanel;
+    GamePanel gamePanel;
+    JButton button;
+    
     Frame(){
-        setTitle("Plants vs. Zombies");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+        this.setTitle("Plants vs. Zombies");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setSize(600, 600);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        this.setUndecorated(true);
         
-        setVisible(true);
+        menuPanel = new MenuPanel();
+        gamePanel = new GamePanel();
+        
+        this.add(gamePanel);
+//        this.add(menuPanel);
+
+        this.setVisible(true);
+        
+        
     }
 }
