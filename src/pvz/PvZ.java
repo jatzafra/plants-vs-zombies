@@ -14,6 +14,8 @@ public class PvZ {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Frame frame = new Frame();
+        
         /*
         //Scenario 1
         SunProducer sunflower = new SunProducer(300, 50, 50);
