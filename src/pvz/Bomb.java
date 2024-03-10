@@ -33,7 +33,6 @@ public class Bomb extends Plant{
                 Tile.removeEntity(z, z.getX(), z.getY());
             }
             Tile.removeEntity(this, this.getX(), this.getY());
-            //JULIANNNN pacheck nito this one has an error for me fsr (sa line above)
         }
     } 
 }
