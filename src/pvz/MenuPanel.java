@@ -32,6 +32,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     JTextField name;
     JButton enterName;
     
+    
     MenuPanel(){
         this.setLayout(new BorderLayout());
         
@@ -40,7 +41,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         JPanel boxPanel = new JPanel();
         boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
         boxPanel.setPreferredSize(new Dimension(500, 1080));
-        boxPanel.setBackground(Color.red);
+//        boxPanel.setBackground(Color.red);
         
         credits = new JButton("Credits");
         easy = new JButton("Easy Mode");
@@ -112,6 +113,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(boxPanel, BorderLayout.EAST);
     }
     
+    @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == credits){
 //            credits.setEnabled(false);

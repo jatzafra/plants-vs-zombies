@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Frame extends JFrame {
     
     MenuPanel menuPanel;
     GamePanel gamePanel;
+    PausePanel pausePanel;
     JButton button;
     
     Frame(){
@@ -29,9 +31,12 @@ public class Frame extends JFrame {
         
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel();
+        pausePanel = new PausePanel();
         
-        this.add(gamePanel);
-//        this.add(menuPanel);
+        // - - - - - - - CHANGE FOLLOWING LINE TO SWITCH DISPLAY - - - - - - -
+        JPanel displayedPanel = menuPanel;
+        
+        this.add(displayedPanel);
 
         this.setVisible(true);
         
