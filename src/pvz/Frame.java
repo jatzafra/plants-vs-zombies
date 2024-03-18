@@ -19,6 +19,7 @@ public class Frame extends JFrame {
     MenuPanel menuPanel;
     GamePanel gamePanel;
     PausePanel pausePanel;
+    CreditsPanel creditsPanel;
     JButton button;
     
     Frame(){
@@ -32,9 +33,10 @@ public class Frame extends JFrame {
         menuPanel = new MenuPanel();
         gamePanel = new GamePanel();
         pausePanel = new PausePanel();
+        creditsPanel = new CreditsPanel();
         
         // - - - - - - - CHANGE FOLLOWING LINE TO SWITCH DISPLAY - - - - - - -
-        JPanel displayedPanel = menuPanel;
+        JPanel displayedPanel = creditsPanel;
         
         this.add(displayedPanel);
 
