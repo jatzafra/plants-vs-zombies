@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.*;
 
 /**
  *
@@ -116,19 +117,31 @@ public class MenuPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == credits){
-//            credits.setEnabled(false);
+            credits.setEnabled(false);
+            CreditsPanel creditsP = new CreditsPanel();
+            this.setVisible(false);
+            creditsP.setVisible(true);
         }
         else if(e.getSource() == easy){
-            
+            GamePanel easyP = new GamePanel();
+            this.setVisible(false);
+            easyP.setVisible(true);
+            String difficulty = "easy"; //kind of a placeholder cuz idk how to indicate the change in difficulty
         }
         else if(e.getSource() == normal){
-            
+            GamePanel normalP = new GamePanel();
+            this.setVisible(false);
+            normalP.setVisible(true);
+            String difficulty = "normal";
         }
         else if(e.getSource() == hard){
-            
+            GamePanel hardP = new GamePanel();
+            this.setVisible(false);
+            hardP.setVisible(true);
+            String difficulty = "hard";
         }
         else if(e.getSource() == enterName){
-            
+            String playerName = name.getText();
         }
     }
 }
