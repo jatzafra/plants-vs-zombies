@@ -28,7 +28,7 @@ import javax.swing.JPanel;
  *
  * @author Lenovo
  */
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
     JButton sunBox, shovelBox, pauseBox, plantBox;
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("wireframe.jpg"));
@@ -115,16 +115,6 @@ public class GamePanel extends JPanel implements ActionListener{
         
         this.add(boxPanel, BorderLayout.NORTH);
         this.add(gridPanel, BorderLayout.CENTER);
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e){
-        for(JButton l : plantButtonList){
-            if(e.getSource() == l){
-//                System.out.println("from " + plantButtonList.indexOf(l));
-                break;
-            }
-        }
     }
     
     private ImageIcon getScaledIcon(ImageIcon srcImg, int w, int h){
