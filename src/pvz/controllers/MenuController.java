@@ -4,6 +4,9 @@
  */
 package pvz.controllers;
 
+import pvz.screens.CreditsPanel;
+import pvz.screens.GamePanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -30,16 +33,28 @@ public class MenuController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == credits){
+            credits.setEnabled(false);
+            CreditsPanel creditsP = new CreditsPanel(credits);
             
+            creditsP.setVisible(true);
         }
         else if(e.getSource() == easy){
-            
+            GamePanel easyP = new GamePanel();
+            easy.setEnabled(false);
+            easyP.setVisible(true);
+            String difficulty = "easy"; //kind of a placeholder cuz idk how to indicate the change in difficulty
         }
         else if(e.getSource() == normal){
-            
+            GamePanel normalP = new GamePanel();
+            normal.setEnabled(false);
+            normalP.setVisible(true);
+            String difficulty = "normal";
         }
         else if(e.getSource() == hard){
-            
+            GamePanel hardP = new GamePanel();
+            hard.setEnabled(false);
+            hardP.setVisible(true);
+            String difficulty = "hard";
         }
         else if(e.getSource() == enterName){
             

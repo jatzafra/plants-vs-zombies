@@ -23,10 +23,10 @@ import javax.swing.JPanel;
 public class CreditsPanel extends JPanel implements ActionListener{
     
     // - - - - - - - Declare Components - - - - - - - 
-    JButton back;
+    JButton back, source;
     JLabel credits;
     
-    public CreditsPanel(){
+    public CreditsPanel(JButton s){
         this.setLayout(new BorderLayout());
         
         // - - - - - - - FlowLayout Subpanel North - - - - - - -
@@ -35,6 +35,7 @@ public class CreditsPanel extends JPanel implements ActionListener{
         flowPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 10));
         
         back = new JButton("Back");
+        source = s;
         
         back.addActionListener(this);
         back.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -67,6 +68,7 @@ public class CreditsPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        source.setEnabled(true);
+        this.dispose(); //doesn't work on my end fsr
     }
 }

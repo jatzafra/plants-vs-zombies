@@ -17,18 +17,28 @@ import javax.swing.JPanel;
 public class PauseController implements ActionListener{
     JPanel panel;
     JLabel pauseIcon, pauseText;
-    JButton play, restart, exit;   
+    JButton play, restart, exit, source;   
     
-    public PauseController(JPanel p, JButton pl, JButton r, JButton e){
+    public PauseController(JPanel p, JButton pl, JButton r, JButton e, JButton s){
         panel = p;
         play = pl;
         restart = r;
         exit = e;
+        source = s;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == play){
+            source.setEnabled(true);
+            this.dispose();
+        }
+        else if(e.getSource() == restart){
+
+        }
+        else if(e.getSource() == exit){
+
+        }
     }
     
 }

@@ -31,12 +31,12 @@ public class PausePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - -     
     PauseController controller;
     JLabel pauseIcon, pauseText;
-    JButton play, restart, exit;    
+    JButton play, restart, exit, source;    
     
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
     
     public PausePanel() {
-        controller = new PauseController(this, play, restart, exit);
+        controller = new PauseController(this, play, restart, exit, source);
         
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 //        this.setAlignmentX(Component.CENTER_ALIGNMENT);
