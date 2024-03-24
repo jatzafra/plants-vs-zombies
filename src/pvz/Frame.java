@@ -7,6 +7,7 @@ package pvz;
 import pvz.screens.*;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,16 +36,17 @@ public class Frame extends JFrame {
         this.setSize(600, 600);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
+        this.setLayout(new CardLayout());
         
-        menuPanel = new MenuPanel();
+        menuPanel = new MenuPanel(this);
         gamePanel = new GamePanel();
-        pausePanel = new PausePanel();
-        creditsPanel = new CreditsPanel();
+        pausePanel = new PausePanel(this);
+        creditsPanel = new CreditsPanel(this);
         
-        // - - - - - - - CHANGE FOLLOWING LINE TO SWITCH DISPLAY - - - - - - -
-        JPanel displayedPanel = gamePanel;
-        
-        this.add(displayedPanel);
+        this.add(gamePanel);
+        this.add(menuPanel);
+        this.add(pausePanel);
+        this.add(creditsPanel);
 
         this.setVisible(true);
         
