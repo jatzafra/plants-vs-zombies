@@ -22,13 +22,10 @@ import java.awt.event.*;
  *
  * @author Lenovo
  */
-public class MenuPanel extends JPanel implements ActionListener {
+public class MenuPanel extends JPanel {
     
     // - - - - - - - Declare Components - - - - - - - 
-    JButton credits;
-    JButton easy;
-    JButton normal;
-    JButton hard;
+    JButton credits, easy, normal, hard;
     
     JTextField name;
     JButton enterName;
@@ -113,34 +110,5 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(flowPanel, BorderLayout.NORTH);
         this.add(boxPanel, BorderLayout.EAST);
     }
-    
-    @Override
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == credits){
-            credits.setEnabled(false);
-            CreditsPanel creditsP = new CreditsPanel(credits);
-            creditsP.setVisible(true);
-        }
-        else if(e.getSource() == easy){
-            GamePanel easyP = new GamePanel();
-            easy.setEnabled(false);
-            easyP.setVisible(true);
-            String difficulty = "easy"; //kind of a placeholder cuz idk how to indicate the change in difficulty
-        }
-        else if(e.getSource() == normal){
-            GamePanel normalP = new GamePanel();
-            normal.setEnabled(false);
-            normalP.setVisible(true);
-            String difficulty = "normal";
-        }
-        else if(e.getSource() == hard){
-            GamePanel hardP = new GamePanel();
-            hard.setEnabled(false);
-            hardP.setVisible(true);
-            String difficulty = "hard";
-        }
-        else if(e.getSource() == enterName){
-            String playerName = name.getText();
-        }
-    }
+
 }
