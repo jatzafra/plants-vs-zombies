@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 public class PausePanel extends JPanel implements ActionListener {
     // - - - - - - - Declare Components - - - - - - -     
     JLabel pauseIcon, pauseText;
-    JButton play, restart, exit;    
+    JButton play, restart, exit, source;    
     
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("wireframe.jpg"));
     
@@ -106,7 +106,16 @@ public class PausePanel extends JPanel implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e){
-        
+        if(e.getSource() == play){
+            source.setEnabled(true);
+            this.dispose();
+        }
+        else if(e.getSource() == restart){
+            
+        }
+        else if(e.getSource() == exit){
+            
+        }
     }
     
     private ImageIcon getScaledIcon(ImageIcon srcImg, int w, int h){

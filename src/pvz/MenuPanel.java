@@ -118,25 +118,24 @@ public class MenuPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == credits){
             credits.setEnabled(false);
-            CreditsPanel creditsP = new CreditsPanel();
-            this.setVisible(false);
+            CreditsPanel creditsP = new CreditsPanel(credits);
             creditsP.setVisible(true);
         }
         else if(e.getSource() == easy){
             GamePanel easyP = new GamePanel();
-            this.setVisible(false);
+            easy.setEnabled(false);
             easyP.setVisible(true);
             String difficulty = "easy"; //kind of a placeholder cuz idk how to indicate the change in difficulty
         }
         else if(e.getSource() == normal){
             GamePanel normalP = new GamePanel();
-            this.setVisible(false);
+            normal.setEnabled(false);
             normalP.setVisible(true);
             String difficulty = "normal";
         }
         else if(e.getSource() == hard){
             GamePanel hardP = new GamePanel();
-            this.setVisible(false);
+            hard.setEnabled(false);
             hardP.setVisible(true);
             String difficulty = "hard";
         }
