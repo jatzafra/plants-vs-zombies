@@ -26,7 +26,7 @@ import javax.swing.JPanel;
  *
  * @author Lenovo
  */
-public class PausePanel extends JPanel implements ActionListener {
+public class PausePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - -     
     JLabel pauseIcon, pauseText;
     JButton play, restart, exit, source;    
@@ -102,20 +102,6 @@ public class PausePanel extends JPanel implements ActionListener {
         this.add(Box.createVerticalGlue());
         this.add(boxPanel, BorderLayout.CENTER);
         this.add(Box.createVerticalGlue());
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == play){
-            source.setEnabled(true);
-            this.dispose();
-        }
-        else if(e.getSource() == restart){
-            
-        }
-        else if(e.getSource() == exit){
-            
-        }
     }
     
     private ImageIcon getScaledIcon(ImageIcon srcImg, int w, int h){
