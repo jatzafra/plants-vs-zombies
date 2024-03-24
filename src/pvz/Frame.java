@@ -4,11 +4,17 @@
  */
 package pvz;
 
+import pvz.screens.*;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import pvz.screens.CreditsPanel;
+import pvz.screens.GamePanel;
+import pvz.screens.MenuPanel;
+import pvz.screens.PausePanel;
 
 /**
  *
@@ -36,7 +42,7 @@ public class Frame extends JFrame {
         creditsPanel = new CreditsPanel();
         
         // - - - - - - - CHANGE FOLLOWING LINE TO SWITCH DISPLAY - - - - - - -
-        JPanel displayedPanel = creditsPanel;
+        JPanel displayedPanel = gamePanel;
         
         this.add(displayedPanel);
 

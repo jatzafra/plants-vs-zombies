@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pvz;
+package pvz.screens;
+
+import pvz.controllers.MenuController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,13 +27,13 @@ import java.awt.event.*;
 public class MenuPanel extends JPanel {
     
     // - - - - - - - Declare Components - - - - - - - 
-    JButton credits, easy, normal, hard;
+    private MenuController controller;
+    private JButton enterName, credits, easy, normal, hard;
+    private JTextField name;
     
-    JTextField name;
-    JButton enterName;
-    
-    
-    MenuPanel(){
+    public MenuPanel(){
+        controller = new MenuController(this, enterName, credits, easy, normal, hard);
+        
         this.setLayout(new BorderLayout());
         
         // - - - - - - - BoxLayout Subpanel East - - - - - - -
@@ -47,10 +49,10 @@ public class MenuPanel extends JPanel {
         hard = new JButton("Hard Mode");
         
         
-        credits.addActionListener(this);
-        easy.addActionListener(this);
-        normal.addActionListener(this);
-        hard.addActionListener(this);
+        credits.addActionListener(controller);
+        easy.addActionListener(controller);
+        normal.addActionListener(controller);
+        hard.addActionListener(controller);
         
         credits.setFont(new Font("Dialog", Font.PLAIN, 60));
         easy.setFont(new Font("Dialog", Font.PLAIN, 40));
@@ -84,7 +86,7 @@ public class MenuPanel extends JPanel {
         name.setHorizontalAlignment(JTextField.CENTER);
         name.setFont(new Font("Monospaced", Font.PLAIN, 20));
         
-        enterName.addActionListener(this);
+        enterName.addActionListener(controller);
         enterName.setFont(new Font("Dialog", Font.PLAIN, 15));
         enterName.setPreferredSize(new Dimension(150, 40));
         enterName.setFocusable(false);
@@ -110,5 +112,5 @@ public class MenuPanel extends JPanel {
         this.add(flowPanel, BorderLayout.NORTH);
         this.add(boxPanel, BorderLayout.EAST);
     }
-
+    
 }

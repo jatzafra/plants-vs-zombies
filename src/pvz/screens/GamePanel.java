@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pvz;
+package pvz.screens;
+
+import pvz.controllers.GameController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,14 +32,18 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
-    JButton sunBox, shovelBox, pauseBox, plantBox;
-    ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("wireframe.jpg"));
+    private GameController controller;
+    private JButton sunBox, shovelBox, pauseBox, plantBox;
     
-    ArrayList<JButton> plantButtonList = new ArrayList<>();
-    ArrayList<ArrayList<JLabel>> gridList;
+    private ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
+    
+    private ArrayList<JButton> plantButtonList = new ArrayList<>();
+    private ArrayList<ArrayList<JLabel>> gridList;
     
     
-    GamePanel(){
+    public GamePanel(){
+        controller = new GameController(this, sunBox, shovelBox, pauseBox, plantBox, plantButtonList, gridList);
+        
         this.gridList = new ArrayList<ArrayList<JLabel>>();
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
@@ -58,7 +64,7 @@ public class GamePanel extends JPanel {
         for(int i = 0; i < 9; i++){
             plantBox = new JButton();
             
-            plantBox.addActionListener(this);
+            plantBox.addActionListener(controller);
             plantBox.setIcon(getScaledIcon(wireframeIcon, 80, 80));
             plantBox.setFocusable(false);
             
@@ -80,6 +86,7 @@ public class GamePanel extends JPanel {
             
             for(int x = 0; x < 9; x++){
                 JLabel label = new JLabel();
+                label.addMouseListener(controller);
                 
                 label.setBorder(BorderFactory.createLineBorder(Color.black));
                 

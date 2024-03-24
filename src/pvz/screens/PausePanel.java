@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pvz;
+package pvz.screens;
 
+import pvz.controllers.PauseController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -28,12 +29,15 @@ import javax.swing.JPanel;
  */
 public class PausePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - -     
+    PauseController controller;
     JLabel pauseIcon, pauseText;
     JButton play, restart, exit, source;    
     
-    ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("wireframe.jpg"));
+    ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
     
-    PausePanel() {
+    public PausePanel() {
+        controller = new PauseController(this, play, restart, exit, source);
+        
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 //        this.setAlignmentX(Component.CENTER_ALIGNMENT);
 //        this.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -56,9 +60,9 @@ public class PausePanel extends JPanel {
         restart = new JButton("Restart");
         exit = new JButton("Exit");
         
-        play.addActionListener(this);
-        restart.addActionListener(this);
-        exit.addActionListener(this);
+        play.addActionListener(controller);
+        restart.addActionListener(controller);
+        exit.addActionListener(controller);
         
         play.setFocusable(false);
         restart.setFocusable(false);
