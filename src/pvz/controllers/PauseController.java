@@ -4,11 +4,13 @@
  */
 package pvz.controllers;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.Frame;
 
 /**
  *
@@ -17,27 +19,28 @@ import javax.swing.JPanel;
 public class PauseController implements ActionListener{
     JPanel panel;
     JLabel pauseIcon, pauseText;
-    JButton play, restart, exit, source;   
+    JButton play, restart, exit;   
+    Frame frame;
     
-    public PauseController(JPanel p, JButton pl, JButton r, JButton e, JButton s){
+    public PauseController(JPanel p, JButton pl, JButton r, JButton e, Frame f){
         panel = p;
         play = pl;
         restart = r;
         exit = e;
-        source = s;
+        frame = f;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == play){
-            source.setEnabled(true);
-            this.dispose();
+            
         }
         else if(e.getSource() == restart){
 
         }
         else if(e.getSource() == exit){
-
+            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+            cardLayout.show(frame.getContentPane(), "menuPanel");
         }
     }
     

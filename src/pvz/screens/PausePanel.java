@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.Frame;
 
 /**
  *
@@ -32,11 +33,13 @@ public class PausePanel extends JPanel {
     PauseController controller;
     JLabel pauseIcon, pauseText;
     JButton play, restart, exit, source;    
+    Frame frame;
     
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
     
-    public PausePanel() {
-        controller = new PauseController(this, play, restart, exit, source);
+    public PausePanel(Frame f) {
+        controller = new PauseController(this, play, restart, exit, frame);
+        this.frame = f;
         
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 //        this.setAlignmentX(Component.CENTER_ALIGNMENT);

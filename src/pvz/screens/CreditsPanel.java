@@ -5,16 +5,17 @@
 package pvz.screens;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.Frame;
 
 /**
  *
@@ -23,11 +24,13 @@ import javax.swing.JPanel;
 public class CreditsPanel extends JPanel implements ActionListener{
     
     // - - - - - - - Declare Components - - - - - - - 
-    JButton back, source;
+    JButton back;
     JLabel credits;
+    Frame framee;
     
-    public CreditsPanel(JButton s){
+    public CreditsPanel(Frame f){
         this.setLayout(new BorderLayout());
+        framee = f;
         
         // - - - - - - - FlowLayout Subpanel North - - - - - - -
         
@@ -35,7 +38,6 @@ public class CreditsPanel extends JPanel implements ActionListener{
         flowPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 10));
         
         back = new JButton("Back");
-        source = s;
         
         back.addActionListener(this);
         back.setFont(new Font("Dialog", Font.PLAIN, 15));
@@ -68,7 +70,9 @@ public class CreditsPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        source.setEnabled(true);
-        this.dispose(); //doesn't work on my end fsr
+        if(e.getSource() == back){
+            CardLayout cardLayout = (CardLayout) framee.getContentPane().getLayout();
+            cardLayout.show(framee.getContentPane(), "menuPanel");
+        }
     }
 }

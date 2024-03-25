@@ -18,6 +18,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.*;
+import pvz.Frame;
 
 /**
  *
@@ -29,10 +31,11 @@ public class MenuPanel extends JPanel {
     private MenuController controller;
     private JButton enterName, credits, easy, normal, hard;
     private JTextField name;
+    private Frame frame;
     
-    
-    public MenuPanel(){
-        controller = new MenuController(this, enterName, credits, easy, normal, hard);
+    public MenuPanel(Frame f){
+        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
+        this.frame = f;
         
         this.setLayout(new BorderLayout());
         
