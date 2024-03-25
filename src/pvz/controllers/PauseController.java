@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import pvz.Frame;
+import pvz.screens.Frame;
 
 /**
  *
@@ -33,10 +33,12 @@ public class PauseController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == play){
-            
+            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+            cardLayout.show(frame.getContentPane(), "gamePanel");
         }
         else if(e.getSource() == restart){
-
+            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+            cardLayout.show(frame.getContentPane(), "gamePanel");
         }
         else if(e.getSource() == exit){
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();

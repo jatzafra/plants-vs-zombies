@@ -2,9 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pvz;
-
-import pvz.screens.*;
+package pvz.screens;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -12,10 +10,6 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import pvz.screens.CreditsPanel;
-import pvz.screens.GamePanel;
-import pvz.screens.MenuPanel;
-import pvz.screens.PausePanel;
 
 /**
  *
@@ -29,25 +23,30 @@ public class Frame extends JFrame {
     CreditsPanel creditsPanel;
     JButton button;
     
-    Frame(){
+    public Frame(){
         this.setTitle("Plants vs. Zombies");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(600, 600);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
-        this.setLayout(new CardLayout());
+        this.getContentPane().setLayout(new CardLayout());
         
         menuPanel = new MenuPanel(this);
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         pausePanel = new PausePanel(this);
         creditsPanel = new CreditsPanel(this);
         
-        this.add(gamePanel);
-        this.add(menuPanel);
-        this.add(pausePanel);
-        this.add(creditsPanel);
-
+        this.getContentPane().add("menuPanel", menuPanel);
+        this.getContentPane().add("gamePanel", gamePanel);
+        this.getContentPane().add("pausePanel", pausePanel);
+        this.getContentPane().add("creditsPanel", creditsPanel);
+        
+        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+        
         this.setVisible(true);
         
         

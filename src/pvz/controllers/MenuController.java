@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import pvz.Frame;
+import pvz.screens.Frame;
 
 /**
  *

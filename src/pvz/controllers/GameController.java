@@ -4,6 +4,7 @@
  */
 package pvz.controllers;
 
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,22 +13,24 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.screens.Frame;
 
 /**
  *
  * @author Lenovo
  */
 public class GameController implements ActionListener, MouseListener{
+    private Frame frame;
     private JPanel panel;
     private JButton sunBox, shovelBox, pauseBox, plantBox;
     
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
-    public GameController(JPanel m, JButton s, JButton sh, JButton p, JButton pl, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
+    public GameController(Frame f, JPanel m, JButton s, JButton p, JButton pl, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
+        frame = f;
         panel = m;
-        sunBox = s;
-        shovelBox = sh;
+        shovelBox = s;
         pauseBox = p;
         plantBox = pl;
         plantButtonList = plist;
@@ -36,6 +39,11 @@ public class GameController implements ActionListener, MouseListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == pauseBox){
+            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+            cardLayout.show(frame.getContentPane(), "pausePanel");
+        }
+        
         for(JButton l : plantButtonList){
             if(e.getSource() == l){
                 System.out.println("from " + plantButtonList.indexOf(l));
