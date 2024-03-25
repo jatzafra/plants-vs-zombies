@@ -2,23 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pvz;
+package pvz.classes;
+
+import pvz.classes.Plant;
 
 /**
  *
  * @author Bella Buyco
  */
- 
-
-public class SunProducer extends Plant{
-    private int sunProduced;
+public class Defense extends Plant{
     
-    public SunProducer(int h, int c, int s){
+    public Defense(int h, int c){
         super(h, c);
-        sunProduced = s;
-    }
-    
-    public void generateSun(){
-        sun += sunProduced;
     }
 }

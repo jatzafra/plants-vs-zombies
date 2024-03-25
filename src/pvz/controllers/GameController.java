@@ -4,6 +4,9 @@
  */
 package pvz.controllers;
 
+import pvz.screens.Frame;
+import pvz.classes.Plant;
+
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import pvz.screens.Frame;
 
 /**
  *
@@ -23,9 +25,10 @@ public class GameController implements ActionListener, MouseListener{
     private Frame frame;
     private JPanel panel;
     private JButton sunBox, shovelBox, pauseBox, plantBox;
-    
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
+    
+    private Plant selectedPlant;
     
     public GameController(Frame f, JPanel m, JButton s, JButton p, JButton pl, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
         frame = f;
@@ -53,7 +56,13 @@ public class GameController implements ActionListener, MouseListener{
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+        for(int y = 0; y < gridList.size(); y++){
+            for(int x = 0; x < gridList.get(y).size(); x++){
+                if(e.getSource() == gridList.get(y).get(x)){
+                    System.out.println("clicked on gridList from " + y + ", " + x);
+                }
+            }
+        }
     }
     @Override
     public void mousePressed(MouseEvent e) {
