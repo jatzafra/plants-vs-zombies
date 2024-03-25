@@ -15,4 +15,7 @@ public class Defense extends Plant{
     public Defense(int h, int c){
         super(h, c);
     }
+    public Defense(int h, int c, String f){
+        super(h, c, f);
+    }
 }

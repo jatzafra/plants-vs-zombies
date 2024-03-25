@@ -19,6 +19,10 @@ public class Shooter extends Plant{
         super(h, c);
         type = t;
     }
+    public Shooter(int h, int c, String t, String f){
+        super(h, c, f);
+        type = t;
+    }
     
     public void shoot(){
         //generate a projectile
@@ -28,6 +32,10 @@ public class Shooter extends Plant{
         Projectile projectile = new Projectile(1, id, 10, type);
         Tile.addEntity(projectile, xCoord, yCoord);
         System.out.println("Shooter made Projectile."); //removable
+    }
+    
+    public String getType(){
+        return type;
     }
     
 }
