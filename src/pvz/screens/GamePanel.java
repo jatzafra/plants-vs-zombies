@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.classes.Plant;
 
 /**
  *
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel {
     private GameController controller;
     private JButton sunBox, shovelBox, pauseBox, plantBox;
     
-    private ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
+    private ImageIcon wireframeIcon = new ImageIcon(getClass().getResource("../imgs/wireframe.jpg"));
     
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
@@ -61,10 +62,11 @@ public class GamePanel extends JPanel {
         sunBox.setVerticalTextPosition(JButton.BOTTOM);
         sunBox.setFocusable(false);
         
-        for(int i = 0; i < 9; i++){
-            plantBox = new JButton();
+        for(Object o : Plant.getUsedPlants()){
+            Plant p = (Plant) o;
             
-            plantBox.setIcon(getScaledIcon(wireframeIcon, 80, 80));
+            plantBox = new JButton();
+            plantBox.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
             plantBox.setFocusable(false);
             
             plantButtonList.add(plantBox);
@@ -86,6 +88,8 @@ public class GamePanel extends JPanel {
             for(int x = 0; x < 9; x++){
                 JLabel label = new JLabel();
                 
+                label.setHorizontalAlignment(JLabel.CENTER);
+                label.setVerticalAlignment(JLabel.CENTER);
                 label.setBorder(BorderFactory.createLineBorder(Color.black));
                 
                 innerArr.add(label);

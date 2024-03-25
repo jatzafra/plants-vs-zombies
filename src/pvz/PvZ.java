@@ -4,6 +4,7 @@
  */
 package pvz;
 
+import pvz.classes.*;
 import pvz.screens.Frame;
 
 /**
@@ -16,6 +17,17 @@ public class PvZ {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        SunProducer sunflower = new SunProducer(300, 50, 50, "sunflowerSketch.png");
+        Shooter peashooter = new Shooter(350, 100, "straight", "peashooterSketch.png");
+        Defense walnut = new Defense(3000, 50, "walnutSketch.png");
+        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "wireframe.jpg");
+        
+        Plant.addUsedPlants(sunflower);
+        Plant.addUsedPlants(peashooter);
+        Plant.addUsedPlants(walnut);
+        Plant.addUsedPlants(cherry);
+        
+        
         Frame frame = new Frame();
         
         /*

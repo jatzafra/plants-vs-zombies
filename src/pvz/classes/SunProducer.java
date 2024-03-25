@@ -17,8 +17,16 @@ public class SunProducer extends Plant{
         super(h, c);
         sunProduced = s;
     }
+    public SunProducer(int h, int c, int s, String f){
+        super(h, c, f);
+        sunProduced = s;
+    }
     
     public void generateSun(){
         sun += sunProduced;
+    }
+    
+    public int getSunProduced(){
+        return sunProduced;
     }
 }

@@ -23,6 +23,12 @@ public class Bomb extends Plant{
         active = a;
         type = t;
     }
+    public Bomb(int h, int c, int u, boolean a, String t, String f){
+        super(h, c, f);
+        chargeUp = u;
+        active = a;
+        type = t;
+    }
     
     public void activate(){
         if(Tile.getFirstZombieInTile(this.getX(), this.getY()) != null || type == "insta"){
@@ -39,4 +45,14 @@ public class Bomb extends Plant{
             Tile.removeEntity(this, this.getX(), this.getY());
         }
     } 
+    
+    public int getChargeUp(){
+        return chargeUp;
+    }
+    public boolean getActive(){
+        return active;
+    }
+    public String getType(){
+        return type;
+    }
 }

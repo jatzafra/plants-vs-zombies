@@ -22,19 +22,19 @@ public class Tile {
     private static ArrayList<Projectile> projectileList = new ArrayList<>();
     
     static{
-        tileArray = new ArrayList[Tile.xLength][Tile.yLength];
+        tileArray = new ArrayList[Tile.yLength][Tile.xLength];
         for(int y = 0; y < Tile.yLength; y++){
             for(int x = 0; x < Tile.xLength; x++){
-                tileArray[x][y] = new ArrayList<>();
+                tileArray[y][x] = new ArrayList<>();
             }
         }
     }
     
-    public static void addEntity(Entity e, int x, int y){
+    public static void addEntity(Entity e, int y, int x){
         if(x >= 0 && x < xLength && y >= 0 && y < yLength){
-            Tile.getEntities(x, y).add(e);
+            Tile.getEntities(y, x).add(e);
 
-            int z = Tile.getEntities(x, y).indexOf(e);
+            int z = Tile.getEntities(y, x).indexOf(e);
             
             e.setCoords(x, y, z);
             
@@ -48,16 +48,16 @@ public class Tile {
         }
     }
     
-    public static void removeEntity(Entity e, int x, int y){
+    public static void removeEntity(Entity e, int y, int x){
         if(x >= 0 && x < xLength && y >= 0 && y < yLength){
-            if(Tile.getEntities(x, y) != null && Tile.getEntities(x, y).contains(e)){
-                Tile.getEntities(x, y).remove(e);
+            if(Tile.getEntities(y, x) != null && Tile.getEntities(y, x).contains(e)){
+                Tile.getEntities(y, x).remove(e);
                 
                 e.setCoords(-1, -1, -1); // Signifies that Entity e is removed from tileArray entirely
                 
                 // Update 'zCoord' values of Entities that shifted downwards due to removal
-                for(int i = 0; i < Tile.getEntities(x, y).size(); i++){
-                    Tile.getEntities(x, y).get(i).setZ(i);
+                for(int i = 0; i < Tile.getEntities(y, x).size(); i++){
+                    Tile.getEntities(y, x).get(i).setZ(i);
                 }
                 
                 if(e instanceof Plant){
@@ -71,15 +71,15 @@ public class Tile {
         }
     }
     
-    public static ArrayList<Entity> getEntities(int x, int y){
+    public static ArrayList<Entity> getEntities(int y, int x){
         if(x >= 0 && x < xLength && y >= 0 && y < yLength) {
-            return tileArray[x][y];
+            return tileArray[y][x];
         }
         return null;
     }
     
-    public static Plant getPlant(int x, int y){
-        ArrayList<Entity> entities = getEntities(x, y);
+    public static Plant getPlant(int y, int x){
+        ArrayList<Entity> entities = getEntities(y, x);
         if(entities != null) {
             for(Entity e : entities){
                 if(e instanceof Plant){
@@ -90,8 +90,8 @@ public class Tile {
         return null;
     }
     
-    public static Zombie getFirstZombieInTile(int x, int y){ 
-        ArrayList<Entity> entities = getEntities(x, y);
+    public static Zombie getFirstZombieInTile(int y, int x){ 
+        ArrayList<Entity> entities = getEntities(y, x);
         if(entities != null) {
             for(Entity e : entities){
                 if(e instanceof Zombie){
@@ -103,8 +103,8 @@ public class Tile {
         }
         return null;
     }
-    public static ArrayList<Zombie> getAllZombiesInTile(int x, int y){ 
-        ArrayList<Entity> entities = getEntities(x, y);
+    public static ArrayList<Zombie> getAllZombiesInTile(int y, int x){ 
+        ArrayList<Entity> entities = getEntities(y, x);
         ArrayList<Zombie> zombies = new ArrayList<>();
         if(entities != null) {
             for(Entity e : entities){
