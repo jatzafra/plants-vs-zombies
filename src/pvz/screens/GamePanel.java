@@ -32,6 +32,7 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
+    private Frame frame;
     private GameController controller;
     private JButton sunBox, shovelBox, pauseBox, plantBox;
     
@@ -40,9 +41,8 @@ public class GamePanel extends JPanel {
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
-    
-    public GamePanel(){
-        controller = new GameController(this, sunBox, shovelBox, pauseBox, plantBox, plantButtonList, gridList);
+    public GamePanel(Frame f){
+        this.frame = f;
         
         this.gridList = new ArrayList<ArrayList<JLabel>>();
         this.setLayout(new BorderLayout());
@@ -64,7 +64,6 @@ public class GamePanel extends JPanel {
         for(int i = 0; i < 9; i++){
             plantBox = new JButton();
             
-            plantBox.addActionListener(controller);
             plantBox.setIcon(getScaledIcon(wireframeIcon, 80, 80));
             plantBox.setFocusable(false);
             
@@ -86,7 +85,6 @@ public class GamePanel extends JPanel {
             
             for(int x = 0; x < 9; x++){
                 JLabel label = new JLabel();
-                label.addMouseListener(controller);
                 
                 label.setBorder(BorderFactory.createLineBorder(Color.black));
                 
@@ -94,6 +92,21 @@ public class GamePanel extends JPanel {
             }
             
             gridList.add(innerArr);
+        }
+        
+        // - - - - - - - Add Controllers to Components - - - - - - - 
+        
+        controller = new GameController(frame, this, shovelBox, pauseBox, plantBox, plantButtonList, gridList);
+        
+        shovelBox.addActionListener(controller);
+        pauseBox.addActionListener(controller);
+        for(JButton p : plantButtonList){
+            p.addActionListener(controller);
+        }
+        for(int y = 0; y < 5; y++){
+            for(int x = 0; x < 9; x++){
+                gridList.get(y).get(x).addMouseListener(controller);
+            }
         }
         
         // - - - - - - - Add Components in Subpanels - - - - - - -

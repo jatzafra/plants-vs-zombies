@@ -11,15 +11,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.event.*;
-import pvz.Frame;
 
 /**
  *
@@ -34,7 +30,6 @@ public class MenuPanel extends JPanel {
     private Frame frame;
     
     public MenuPanel(Frame f){
-        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
         this.frame = f;
         
         this.setLayout(new BorderLayout());
@@ -50,12 +45,6 @@ public class MenuPanel extends JPanel {
         easy = new JButton("Easy Mode");
         normal = new JButton("Normal Mode");
         hard = new JButton("Hard Mode");
-        
-        
-        credits.addActionListener(controller);
-        easy.addActionListener(controller);
-        normal.addActionListener(controller);
-        hard.addActionListener(controller);
         
         credits.setFont(new Font("Dialog", Font.PLAIN, 60));
         easy.setFont(new Font("Dialog", Font.PLAIN, 40));
@@ -89,10 +78,19 @@ public class MenuPanel extends JPanel {
         name.setHorizontalAlignment(JTextField.CENTER);
         name.setFont(new Font("Monospaced", Font.PLAIN, 20));
         
-        enterName.addActionListener(controller);
         enterName.setFont(new Font("Dialog", Font.PLAIN, 15));
         enterName.setPreferredSize(new Dimension(150, 40));
         enterName.setFocusable(false);
+        
+        // - - - - - - - Add controllers to Components  - - - - - - - 
+        
+        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
+        
+        credits.addActionListener(controller);
+        easy.addActionListener(controller);
+        normal.addActionListener(controller);
+        hard.addActionListener(controller);
+        enterName.addActionListener(controller);
         
         // - - - - - - - Add Components in Subpanels - - - - - - -
         
@@ -109,7 +107,7 @@ public class MenuPanel extends JPanel {
         
         flowPanel.add (name);
         flowPanel.add(enterName);
-            
+        
         // - - - - - - - Add Subpanels in Panel - - - - - - -
         
         this.add(flowPanel, BorderLayout.NORTH);

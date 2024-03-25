@@ -4,6 +4,8 @@
  */
 package pvz;
 
+import pvz.screens.Frame;
+
 /**
  *
  * @author TRUTH

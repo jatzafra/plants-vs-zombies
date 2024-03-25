@@ -22,7 +22,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import pvz.Frame;
 
 /**
  *
@@ -38,7 +37,6 @@ public class PausePanel extends JPanel {
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
     
     public PausePanel(Frame f) {
-        controller = new PauseController(this, play, restart, exit, frame);
         this.frame = f;
         
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -63,10 +61,6 @@ public class PausePanel extends JPanel {
         restart = new JButton("Restart");
         exit = new JButton("Exit");
         
-        play.addActionListener(controller);
-        restart.addActionListener(controller);
-        exit.addActionListener(controller);
-        
         play.setFocusable(false);
         restart.setFocusable(false);
         exit.setFocusable(false);
@@ -83,6 +77,14 @@ public class PausePanel extends JPanel {
         
         pauseIcon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         pauseText.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        
+        // - - - - - - - Add Controllers to Components - - - - - - - 
+        
+        controller = new PauseController(this, play, restart, exit, frame);
+        
+        play.addActionListener(controller);
+        restart.addActionListener(controller);
+        exit.addActionListener(controller);
         
         // - - - - - - - Add Components in Sub-subpanels - - - - - - -
         

@@ -15,7 +15,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import pvz.Frame;
 
 /**
  *
@@ -26,11 +25,12 @@ public class CreditsPanel extends JPanel implements ActionListener{
     // - - - - - - - Declare Components - - - - - - - 
     JButton back;
     JLabel credits;
-    Frame framee;
+    Frame frame;
     
     public CreditsPanel(Frame f){
+        this.frame = f;
+        
         this.setLayout(new BorderLayout());
-        framee = f;
         
         // - - - - - - - FlowLayout Subpanel North - - - - - - -
         
@@ -71,8 +71,8 @@ public class CreditsPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == back){
-            CardLayout cardLayout = (CardLayout) framee.getContentPane().getLayout();
-            cardLayout.show(framee.getContentPane(), "menuPanel");
+            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+            cardLayout.show(frame.getContentPane(), "menuPanel");
         }
     }
 }
