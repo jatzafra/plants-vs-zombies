@@ -12,8 +12,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -22,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.controllers.ResetGameListener;
 
 /**
  *
@@ -29,10 +28,10 @@ import javax.swing.JPanel;
  */
 public class PausePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - -     
-    PauseController controller;
-    JLabel pauseIcon, pauseText;
-    JButton play, restart, exit, source;    
+    PauseController controller;    
     Frame frame;
+    JLabel pauseIcon, pauseText;
+    JButton play, restart, exit, source;
     
     ImageIcon wireframeIcon = new ImageIcon(GamePanel.class.getResource("../imgs/wireframe.jpg"));
     
@@ -78,14 +77,6 @@ public class PausePanel extends JPanel {
         pauseIcon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         pauseText.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         
-        // - - - - - - - Add Controllers to Components - - - - - - - 
-        
-        controller = new PauseController(this, play, restart, exit, frame);
-        
-        play.addActionListener(controller);
-        restart.addActionListener(controller);
-        exit.addActionListener(controller);
-        
         // - - - - - - - Add Components in Sub-subpanels - - - - - - -
         
         buttonPanel.add(Box.createHorizontalGlue());
@@ -111,6 +102,19 @@ public class PausePanel extends JPanel {
         this.add(Box.createVerticalGlue());
         this.add(boxPanel, BorderLayout.CENTER);
         this.add(Box.createVerticalGlue());
+    }
+    
+    public void addPauseController(){
+        controller = new PauseController(frame, this, play, restart, exit);
+        
+        play.addActionListener(controller);
+        restart.addActionListener(controller);
+        exit.addActionListener(controller);
+    }
+    public void addResetGameListener(GamePanel g){
+        ResetGameListener listener = new ResetGameListener(g);
+        restart.addActionListener(listener);
+        exit.addActionListener(listener);
     }
     
     private ImageIcon getScaledIcon(ImageIcon srcImg, int w, int h){

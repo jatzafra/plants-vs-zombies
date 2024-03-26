@@ -33,22 +33,37 @@ import javax.swing.JPanel;
 public class GameController implements ActionListener, MouseListener{
     private Frame frame;
     private JPanel panel;
-    private JButton shovelBox, pauseBox, plantBox;
+    private JButton shovelBox, pauseBox;
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
     private Plant selectedPlant;
     
-    public GameController(Frame f, JPanel m, JButton s, JButton p, JButton pl, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
+    public GameController(Frame f, JPanel m, JButton s, JButton p, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
         frame = f;
         panel = m;
         shovelBox = s;
         pauseBox = p;
-        plantBox = pl;
         plantButtonList = plist;
         gridList = glist;
     }
-
+    
+    public void resetGameScreen(){
+        /* FOR PLANT INVENTORY RESET | NOT COMPLETELY FUNCTIONAL NOR NEEDED 
+        for(JButton b : plantButtonList){
+            int index = plantButtonList.indexOf(b);
+            Plant p = (Plant) Plant.getUsedPlants().get(index);
+            
+            b.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
+        }*/
+        for(int y = 0; y < gridList.size(); y++){
+            for(int x = 0; x < gridList.get(y).size(); x++){
+                gridList.get(y).get(x).setIcon(null);
+            }
+        }
+        
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         selectedPlant = null;

@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import pvz.controllers.ResetGameListener;
 
 /**
  *
@@ -37,15 +38,24 @@ public class Frame extends JFrame {
         pausePanel = new PausePanel(this);
         creditsPanel = new CreditsPanel(this);
         
+        
+        menuPanel.addMenuController();
+        gamePanel.addGameController();
+        pausePanel.addPauseController();
+        
+        menuPanel.addResetGameListener(gamePanel);
+        pausePanel.addResetGameListener(gamePanel);
+        
+        
         this.getContentPane().add("menuPanel", menuPanel);
         this.getContentPane().add("gamePanel", gamePanel);
         this.getContentPane().add("pausePanel", pausePanel);
         this.getContentPane().add("creditsPanel", creditsPanel);
         
-        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
+//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
         
         this.setVisible(true);
         

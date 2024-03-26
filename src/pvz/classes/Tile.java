@@ -30,6 +30,21 @@ public class Tile {
         }
     }
     
+    public static void clearAllEntities(){
+        for(int i = plantList.size() - 1; i >= 0; i--){ 
+            Plant plant = plantList.get(i);
+            Tile.removeEntity(plant, plant.getY(), plant.getX());
+        }
+        for(int i = zombieList.size() - 1; i >= 0; i--){ 
+            Zombie zombie = zombieList.get(i);
+            Tile.removeEntity(zombie, zombie.getY(), zombie.getX());
+        }
+        for(int i = projectileList.size() - 1; i >= 0; i--){ 
+            Projectile projectile = projectileList.get(i);
+            Tile.removeEntity(projectile, projectile.getY(), projectile.getX());
+        }
+    }
+    
     public static void addEntity(Entity e, int y, int x){
         if(x >= 0 && x < xLength && y >= 0 && y < yLength){
             Tile.getEntities(y, x).add(e);
