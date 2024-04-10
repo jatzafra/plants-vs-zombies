@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pvz.controllers.ResetGameListener;
 
 /**
  *
@@ -82,16 +83,6 @@ public class MenuPanel extends JPanel {
         enterName.setPreferredSize(new Dimension(150, 40));
         enterName.setFocusable(false);
         
-        // - - - - - - - Add controllers to Components  - - - - - - - 
-        
-        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
-        
-        credits.addActionListener(controller);
-        easy.addActionListener(controller);
-        normal.addActionListener(controller);
-        hard.addActionListener(controller);
-        enterName.addActionListener(controller);
-        
         // - - - - - - - Add Components in Subpanels - - - - - - -
         
         boxPanel.add(Box.createVerticalGlue());
@@ -112,6 +103,23 @@ public class MenuPanel extends JPanel {
         
         this.add(flowPanel, BorderLayout.NORTH);
         this.add(boxPanel, BorderLayout.EAST);
+    }
+    
+    public void addMenuController(){
+        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
+        
+        credits.addActionListener(controller);
+        easy.addActionListener(controller);
+        normal.addActionListener(controller);
+        hard.addActionListener(controller);
+        enterName.addActionListener(controller);
+    }
+    public void addResetGameListener(GamePanel g){
+        ResetGameListener listener = new ResetGameListener(g);
+        // NOT NECESSARY
+//        easy.addActionListener(listener);
+//        normal.addActionListener(listener);
+//        hard.addActionListener(listener);
     }
     
 }

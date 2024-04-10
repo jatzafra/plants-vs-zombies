@@ -33,22 +33,38 @@ import javax.swing.JPanel;
 public class GameController implements ActionListener, MouseListener{
     private Frame frame;
     private JPanel panel;
-    private JButton shovelBox, pauseBox, plantBox;
+    private JButton shovelBox, pauseBox;
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
     private Plant selectedPlant;
     
-    public GameController(Frame f, JPanel m, JButton s, JButton p, JButton pl, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
+    public GameController(Frame f, JPanel m, JButton s, JButton p, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
         frame = f;
         panel = m;
         shovelBox = s;
         pauseBox = p;
-        plantBox = pl;
         plantButtonList = plist;
         gridList = glist;
     }
-
+    
+    public void resetGameScreen(){ // does not reset Tile instance
+        
+        /* FOR PLANT INVENTORY RESET | NOT COMPLETELY FUNCTIONAL NOR NEEDED 
+        for(JButton b : plantButtonList){
+            int index = plantButtonList.indexOf(b);
+            Plant p = (Plant) Plant.getUsedPlants().get(index);
+            
+            b.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
+        }*/
+        for(int y = 0; y < gridList.size(); y++){
+            for(int x = 0; x < gridList.get(y).size(); x++){
+                gridList.get(y).get(x).setIcon(null);
+            }
+        }
+        
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         selectedPlant = null;
@@ -74,28 +90,35 @@ public class GameController implements ActionListener, MouseListener{
             for(int x = 0; x < gridList.get(y).size(); x++){
                 if(e.getSource() == gridList.get(y).get(x)){
 //                    System.out.println("clicked on gridList from " + y + ", " + x);
-                    if(selectedPlant != null){
-                        if(selectedPlant instanceof SunProducer){
-                            SunProducer selected = (SunProducer) selectedPlant;
-                            SunProducer newP = new SunProducer(selected.getHP(), selected.getSunCost(), selected.getSunProduced(), selected.getImgFilename());
-                            Tile.addEntity(newP, x, y);
-                        } else if(selectedPlant instanceof Shooter){
-                            Shooter selected = (Shooter) selectedPlant;
-                            Shooter newP = new Shooter(selected.getHP(), selected.getSunCost(), selected.getType(), selected.getImgFilename());
-                            Tile.addEntity(newP, x, y);
-                        } else if(selectedPlant instanceof Defense){
-                            Defense selected = (Defense) selectedPlant;
-                            Defense newP = new Defense(selected.getHP(), selected.getSunCost(), selected.getImgFilename());
-                            Tile.addEntity(newP, x, y);
-                        } else if(selectedPlant instanceof Bomb){
-                            Bomb selected = (Bomb) selectedPlant;
-                            Bomb newP = new Bomb(selected.getHP(), selected.getSunCost(), selected.getChargeUp(), selected.getActive(), selected.getType(), selected.getImgFilename());
-                            Tile.addEntity(newP, x, y);
-                        }
-                        JLabel label = gridList.get(y).get(x);
-                        label.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + selectedPlant.getImgFilename())), 80, 100));
-                        
+                    if(selectedPlant == null){
+//                        System.out.println("no selected plant");
+                        break;
                     }
+                    if(Tile.getPlant(y, x) != null){
+//                        System.out.println("plant already in tile");
+                        break;
+                    }
+                    
+                    if(selectedPlant instanceof SunProducer){
+                        SunProducer selected = (SunProducer) selectedPlant;
+                        SunProducer newP = new SunProducer(selected.getHP(), selected.getSunCost(), selected.getSunProduced(), selected.getImgFilename());
+                        Tile.addEntity(newP, y, x);
+                    } else if(selectedPlant instanceof Shooter){
+                        Shooter selected = (Shooter) selectedPlant;
+                        Shooter newP = new Shooter(selected.getHP(), selected.getSunCost(), selected.getType(), selected.getImgFilename());
+                        Tile.addEntity(newP, y, x);
+                    } else if(selectedPlant instanceof Defense){
+                        Defense selected = (Defense) selectedPlant;
+                        Defense newP = new Defense(selected.getHP(), selected.getSunCost(), selected.getImgFilename());
+                        Tile.addEntity(newP, y, x);
+                    } else if(selectedPlant instanceof Bomb){
+                        Bomb selected = (Bomb) selectedPlant;
+                        Bomb newP = new Bomb(selected.getHP(), selected.getSunCost(), selected.getChargeUp(), selected.getActive(), selected.getType(), selected.getImgFilename());
+                        Tile.addEntity(newP, y, x);
+                    }
+                    JLabel label = gridList.get(y).get(x);
+                    label.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + selectedPlant.getImgFilename())), 80, 100));
+                    selectedPlant = null;
                 }
             }
         }

@@ -14,8 +14,6 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -35,7 +33,7 @@ public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
     private Frame frame;
     private GameController controller;
-    private JButton sunBox, shovelBox, pauseBox, plantBox;
+    private JButton sunBox, shovelBox, pauseBox;
     
     private ImageIcon wireframeIcon = new ImageIcon(getClass().getResource("../imgs/wireframe.jpg"));
     
@@ -65,7 +63,7 @@ public class GamePanel extends JPanel {
         for(Object o : Plant.getUsedPlants()){
             Plant p = (Plant) o;
             
-            plantBox = new JButton();
+            JButton plantBox = new JButton();
             plantBox.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
             plantBox.setFocusable(false);
             
@@ -98,21 +96,6 @@ public class GamePanel extends JPanel {
             gridList.add(innerArr);
         }
         
-        // - - - - - - - Add Controllers to Components - - - - - - - 
-        
-        controller = new GameController(frame, this, shovelBox, pauseBox, plantBox, plantButtonList, gridList);
-        
-        shovelBox.addActionListener(controller);
-        pauseBox.addActionListener(controller);
-        for(JButton p : plantButtonList){
-            p.addActionListener(controller);
-        }
-        for(int y = 0; y < 5; y++){
-            for(int x = 0; x < 9; x++){
-                gridList.get(y).get(x).addMouseListener(controller);
-            }
-        }
-        
         // - - - - - - - Add Components in Subpanels - - - - - - -
         
         boxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
@@ -139,6 +122,25 @@ public class GamePanel extends JPanel {
         
         this.add(boxPanel, BorderLayout.NORTH);
         this.add(gridPanel, BorderLayout.CENTER);
+    }
+    
+    public GameController getController(){
+        return controller;
+    }
+    
+    public void addGameController(){
+        controller = new GameController(frame, this, shovelBox, pauseBox, plantButtonList, gridList);
+        
+        shovelBox.addActionListener(controller);
+        pauseBox.addActionListener(controller);
+        for(JButton p : plantButtonList){
+            p.addActionListener(controller);
+        }
+        for(int y = 0; y < 5; y++){
+            for(int x = 0; x < 9; x++){
+                gridList.get(y).get(x).addMouseListener(controller);
+            }
+        }
     }
     
     private ImageIcon getScaledIcon(ImageIcon srcImg, int w, int h){

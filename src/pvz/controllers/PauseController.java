@@ -21,22 +21,19 @@ public class PauseController implements ActionListener{
     JLabel pauseIcon, pauseText;
     JButton play, restart, exit;   
     Frame frame;
+    GameController gameController;
     
-    public PauseController(JPanel p, JButton pl, JButton r, JButton e, Frame f){
+    public PauseController(Frame f, JPanel p, JButton pl, JButton r, JButton e){
+        frame = f;
         panel = p;
         play = pl;
         restart = r;
         exit = e;
-        frame = f;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == play){
-            CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
-            cardLayout.show(frame.getContentPane(), "gamePanel");
-        }
-        else if(e.getSource() == restart){
+        if(e.getSource() == play || e.getSource() == restart){
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "gamePanel");
         }
