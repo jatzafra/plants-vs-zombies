@@ -13,12 +13,12 @@ package pvz.classes;
 public class SunProducer extends Plant{
     private int sunProduced;
     
-    public SunProducer(int h, int c, int s){
-        super(h, c);
+    public SunProducer(int h, int c, int s, int sw, int sh){
+        super(h, c, sw, sh);
         sunProduced = s;
     }
-    public SunProducer(int h, int c, int s, String f){
-        super(h, c, f);
+    public SunProducer(int h, int c, int s, String f, int sw, int sh){
+        super(h, c, f, sw, sh);
         sunProduced = s;
     }
     

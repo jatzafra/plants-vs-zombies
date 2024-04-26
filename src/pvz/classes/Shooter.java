@@ -15,12 +15,12 @@ public class Shooter extends Plant{
     private String type;
     private static int projectileCounter = 0;
     
-    public Shooter(int h, int c, String t){
-        super(h, c);
+    public Shooter(int h, int c, String t, int sw, int sh){
+        super(h, c, sw, sh);
         type = t;
     }
-    public Shooter(int h, int c, String t, String f){
-        super(h, c, f);
+    public Shooter(int h, int c, String t, String f, int sw, int sh){
+        super(h, c, f, sw, sh);
         type = t;
     }
     

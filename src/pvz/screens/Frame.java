@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import pvz.classes.BufferedImageLoader;
 import pvz.controllers.ResetGameListener;
 
 /**
@@ -18,11 +19,11 @@ import pvz.controllers.ResetGameListener;
  */
 public class Frame extends JFrame {
     
-    MenuPanel menuPanel;
-    GamePanel gamePanel;
-    PausePanel pausePanel;
-    CreditsPanel creditsPanel;
-    JButton button;
+    private MenuPanel menuPanel;
+    private GamePanel gamePanel;
+    private PausePanel pausePanel;
+    private CreditsPanel creditsPanel;
+    private JButton button;
     
     public Frame(){
         this.setTitle("Plants vs. Zombies");
@@ -51,11 +52,6 @@ public class Frame extends JFrame {
         this.getContentPane().add("gamePanel", gamePanel);
         this.getContentPane().add("pausePanel", pausePanel);
         this.getContentPane().add("creditsPanel", creditsPanel);
-        
-//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
-//        ((CardLayout)(this.getContentPane().getLayout())).next(this.getContentPane());
         
         this.setVisible(true);
         

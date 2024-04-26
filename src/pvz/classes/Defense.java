@@ -12,10 +12,10 @@ import pvz.classes.Plant;
  */
 public class Defense extends Plant{
     
-    public Defense(int h, int c){
-        super(h, c);
+    public Defense(int h, int c, int sw, int sh){
+        super(h, c, sw, sh);
     }
-    public Defense(int h, int c, String f){
-        super(h, c, f);
+    public Defense(int h, int c, String f, int sw, int sh){
+        super(h, c, f, sw, sh);
     }
 }
