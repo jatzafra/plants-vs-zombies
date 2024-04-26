@@ -4,6 +4,11 @@
  */
 package pvz;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pvz.classes.*;
 import pvz.screens.Frame;
 
@@ -17,16 +22,31 @@ public class PvZ {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SunProducer sunflower = new SunProducer(300, 50, 50, "sunflowerSketch.png");
-        Shooter peashooter = new Shooter(350, 100, "straight", "peashooterSketch.png");
-        Defense walnut = new Defense(3000, 50, "walnutSketch.png");
-        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "wireframe.jpg");
+        BufferedImageLoader imgLoader = new BufferedImageLoader();
+        
+        SunProducer sunflower = new SunProducer(300, 50, 50, "sunflower_idle.png", 900, 1200);
+        Shooter peashooter = new Shooter(350, 100, "straight", "peashooter_idle.png", 900, 1200);
+        Defense walnut = new Defense(3000, 50, "walnutSketch.png", 1280, 1596);
+        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "wireframe.jpg", 200, 200);
         
         Plant.addUsedPlants(sunflower);
         Plant.addUsedPlants(peashooter);
         Plant.addUsedPlants(walnut);
         Plant.addUsedPlants(cherry);
         
+        for(Object o : Plant.getUsedPlants()){
+            Plant p = (Plant) o;
+            
+            try {
+                SpriteSheet sheet = new SpriteSheet(imgLoader.loadImage("/imgs/" + p.getImgFilename()));
+                int width, height;
+//                Image img = imgLoader.loadImage("/imgs/" + p.getImgFilename());
+//                System.out.println(p.getImgFilename() + " - " + img.getWidth(null) + ", " + img.getHeight(null));
+                p.setSpriteSheet(sheet);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         
         Frame frame = new Frame();
         

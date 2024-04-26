@@ -63,8 +63,12 @@ public class GamePanel extends JPanel {
         for(Object o : Plant.getUsedPlants()){
             Plant p = (Plant) o;
             
+            BufferedImage grabbedImg = p.getSpriteSheet().grabImage(1, 1, p.getSpriteWidth(), p.getSpriteHeight());
+            BufferedImage resizedImg = p.getSpriteSheet().resizeImage(75, 100,grabbedImg);
+            
             JButton plantBox = new JButton();
-            plantBox.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
+            plantBox.setIcon(new ImageIcon(resizedImg));
+//            plantBox.setIcon(getScaledIcon(new ImageIcon(getClass().getResource("../imgs/" + p.getImgFilename())), 80, 100));
             plantBox.setFocusable(false);
             
             plantButtonList.add(plantBox);
