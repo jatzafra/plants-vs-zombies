@@ -9,11 +9,13 @@ import pvz.controllers.GameController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
@@ -21,7 +23,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import pvz.classes.Plant;
 
@@ -32,6 +36,8 @@ import pvz.classes.Plant;
 public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
     private Frame frame;
+    private JLayeredPane layeredPane;
+    private JPanel background, gameLayer;
     private GameController controller;
     private JButton sunBox, shovelBox, pauseBox;
     
@@ -40,17 +46,49 @@ public class GamePanel extends JPanel {
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    double width = screenSize.getWidth();
+    double height = screenSize.getHeight();
+    
     public GamePanel(Frame f){
         this.frame = f;
         
         this.gridList = new ArrayList<ArrayList<JLabel>>();
-        this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        this.setLayout(null);
+        
+        // - - - - - - - LayeredPane - - - - - - -
+        layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0, (int)width, (int)height);
+        
+        // - - - - - - - BackgroundLayer - - - - - - -
+        background = new JPanel();
+        background.setLayout(null);
+        background.setBounds(0, 0, (int)width, (int)height);
+        
+//        ImageIcon bg = new ImageIcon(getClass().getResource("../imgs/pvz_backgroundTemp.png"));        
+        ImageIcon bg = new ImageIcon(getClass().getResource("../imgs/garden_draft.png"));
+        ImageIcon resizedBg = getScaledIcon(bg, 2219, 850);
+        
+        JLabel bgLabel = new JLabel();
+        bgLabel.setBounds(-200, 0, 2219, 850);
+        bgLabel.setIcon(resizedBg);
+        bgLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+        bgLabel.setHorizontalAlignment(JLabel.LEFT);
+        bgLabel.setVerticalAlignment(JLabel.TOP);
+        background.add(bgLabel);
+        
+        // - - - - - - - GameLayer - - - - - - -
+        gameLayer = new JPanel();
+        gameLayer.setLayout(new BorderLayout());
+        gameLayer.setBounds(0, 0, (int)width, (int)height);
+        gameLayer.setOpaque(false);
+        gameLayer.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         
         // - - - - - - - BoxLayout Subpanel North - - - - - - -
         
         JPanel boxPanel = new JPanel();
         boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.X_AXIS));
+        boxPanel.setOpaque(false);
         
         sunBox = new JButton();
         sunBox.setText("#Sun");
@@ -82,7 +120,8 @@ public class GamePanel extends JPanel {
         
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(5, 9));
-        gridPanel.setBorder(BorderFactory.createEmptyBorder(40, 230, 40, 230));
+        gridPanel.setOpaque(false);
+        gridPanel.setBorder(BorderFactory.createEmptyBorder(70, 340, 84, 120));
         
         for(int y = 0; y < 5; y++){
             ArrayList<JLabel> innerArr = new ArrayList<>();
@@ -122,10 +161,16 @@ public class GamePanel extends JPanel {
             }
         }
             
-        // - - - - - - - Add Subpanels in Panel - - - - - - -
+        // - - - - - - - Add Subpanels in GameLayer - - - - - - -
+        gameLayer.add(boxPanel, BorderLayout.NORTH);
+        gameLayer.add(gridPanel, BorderLayout.CENTER);
         
-        this.add(boxPanel, BorderLayout.NORTH);
-        this.add(gridPanel, BorderLayout.CENTER);
+        // - - - - - - - Add Layers to LayeredPane - - - - - - - 
+        layeredPane.add(background, Integer.valueOf(0));
+        layeredPane.add(gameLayer, Integer.valueOf(2));
+        
+        // - - - - - - - Add LayeredPane to GamePanel - - - - - - - 
+        this.add(layeredPane);
     }
     
     public GameController getController(){

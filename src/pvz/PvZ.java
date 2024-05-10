@@ -26,8 +26,8 @@ public class PvZ {
         
         SunProducer sunflower = new SunProducer(300, 50, 50, "sunflower_idle.png", 900, 1200, 12);
         Shooter peashooter = new Shooter(350, 100, "straight", "peashooter_idle.png", 900, 1200, 12);
-        Defense walnut = new Defense(3000, 50, "walnutSketch.png", 1280, 1596, 1);
-        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "wireframe.jpg", 200, 200, 1);
+        Defense walnut = new Defense(3000, 50, "wallnut_idle.png", 900, 1200, 1);
+        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "cherrybomb_draft.png", 900, 1200, 1);
         
         Plant.addUsedPlants(sunflower);
         Plant.addUsedPlants(peashooter);

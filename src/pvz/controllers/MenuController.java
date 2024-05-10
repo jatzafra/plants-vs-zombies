@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import pvz.screens.Frame;
 
 /**
@@ -21,11 +22,15 @@ import pvz.screens.Frame;
  */
 public class MenuController implements ActionListener{
     private JPanel panel;
+    private JTextField nameField;
     private JButton enterName, credits, easy, normal, hard;
     private Frame frame;
     
-    public MenuController(JPanel p, JButton eName, JButton c, JButton e, JButton n, JButton h, Frame f){
+    private String name;
+    
+    public MenuController(JPanel p, JTextField nText, JButton eName, JButton c, JButton e, JButton n, JButton h, Frame f){
         panel = p;
+        nameField = nText;
         enterName = eName;
         credits = c;
         easy = e;
@@ -56,7 +61,8 @@ public class MenuController implements ActionListener{
             String difficulty = "hard";
         }
         else if(e.getSource() == enterName){
-            String name = enterName.getText();
+            name = nameField.getText();
+//            System.out.println("User: " + name);
         }
     }
     
