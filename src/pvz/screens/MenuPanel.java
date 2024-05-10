@@ -27,7 +27,7 @@ public class MenuPanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
     private MenuController controller;
     private JButton enterName, credits, easy, normal, hard;
-    private JTextField name;
+    private JTextField nameField;
     private Frame frame;
     
     public MenuPanel(Frame f){
@@ -72,12 +72,12 @@ public class MenuPanel extends JPanel {
         JPanel flowPanel = new JPanel();
         flowPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 10));
         
-        name = new JTextField();
+        nameField = new JTextField();
         enterName = new JButton("Enter Name");
         
-        name.setPreferredSize(new Dimension(300, 50));
-        name.setHorizontalAlignment(JTextField.CENTER);
-        name.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        nameField.setPreferredSize(new Dimension(300, 50));
+        nameField.setHorizontalAlignment(JTextField.CENTER);
+        nameField.setFont(new Font("Monospaced", Font.PLAIN, 20));
         
         enterName.setFont(new Font("Dialog", Font.PLAIN, 15));
         enterName.setPreferredSize(new Dimension(150, 40));
@@ -96,7 +96,7 @@ public class MenuPanel extends JPanel {
         boxPanel.add(Box.createRigidArea(new Dimension(0, 0)));
         boxPanel.add(Box.createVerticalGlue());
         
-        flowPanel.add (name);
+        flowPanel.add (nameField);
         flowPanel.add(enterName);
         
         // - - - - - - - Add Subpanels in Panel - - - - - - -
@@ -106,7 +106,7 @@ public class MenuPanel extends JPanel {
     }
     
     public void addMenuController(){
-        controller = new MenuController(this, enterName, credits, easy, normal, hard, frame);
+        controller = new MenuController(this, nameField, enterName, credits, easy, normal, hard, frame);
         
         credits.addActionListener(controller);
         easy.addActionListener(controller);

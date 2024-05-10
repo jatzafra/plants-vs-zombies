@@ -61,6 +61,7 @@ public class GameController implements ActionListener, MouseListener{
     public void loopGame(){
         while(true){
             if(System.nanoTime() - lastUpdate >= timePerUpdate){
+                lastUpdate = System.nanoTime();
                 updateGame();
             }
             if(System.nanoTime() - lastFrame >= timePerFrame){

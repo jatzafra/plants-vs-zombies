@@ -41,7 +41,6 @@ public class Frame extends JFrame {
         pausePanel = new PausePanel(this);
         creditsPanel = new CreditsPanel(this);
         
-        
         menuPanel.addMenuController();
         gamePanel.addGameController();
         pausePanel.addPauseController();
