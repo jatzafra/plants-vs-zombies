@@ -14,8 +14,8 @@ public class Zombie extends Entity {
     private int atk;
     private Plant target;
     
-    public Zombie(String t, int h, int a, int s){
-        super(s);
+    public Zombie(String t, int h, int a, int s, String f, int sw, int sh, int maxF){
+        super(s, f, sw, sh, maxF);
         type = t;
         hp = h;
         atk = a;

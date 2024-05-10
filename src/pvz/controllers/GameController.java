@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.classes.SpriteSheet;
 
 /**
  *
@@ -40,6 +41,12 @@ public class GameController implements ActionListener, MouseListener{
     private Plant selectedPlant;
     private boolean shovelActive = false;
     
+    private int frames;
+    private long lastFrame;
+    private double timePerFrame;
+    private long lastUpdate;
+    private double timePerUpdate;
+    
     public GameController(Frame f, JPanel m, JButton s, JButton p, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
         frame = f;
         panel = m;
@@ -47,6 +54,48 @@ public class GameController implements ActionListener, MouseListener{
         pauseBox = p;
         plantButtonList = plist;
         gridList = glist;
+        timePerFrame = 1000000000.0 / 120.0; //120 per sec
+        timePerUpdate = 1000000000.0 / 60.0; //60 per sec
+    }
+    
+    public void loopGame(){
+        while(true){
+            if(System.nanoTime() - lastUpdate >= timePerUpdate){
+                updateGame();
+            }
+            if(System.nanoTime() - lastFrame >= timePerFrame){
+                lastFrame = System.nanoTime();
+                nextFrame();
+            }
+        }
+    }
+    
+    public void updateGame(){
+        
+    }
+    public void nextFrame(){
+        for(Plant p : Tile.getPlantList()){
+            int maxFrameInterval = 18; // standard frame interval
+            
+            // special frame intervals
+            if(p instanceof SunProducer){
+                maxFrameInterval = 30;
+            }
+            
+            if(p.getFrameInterval() < maxFrameInterval){ // plant's frames update after every 30 frames
+                p.incFrameInterval();
+            } else{ 
+                p.setFrameInterval(0);
+                p.incAnimFrame();
+
+                BufferedImage grabbedImg = p.getSpriteSheet().grabImage(p.getAnimFrame(), 1, p.getSpriteWidth(), p.getSpriteHeight());
+                BufferedImage resizedImg = p.getSpriteSheet().resizeImage(75, 100,grabbedImg);
+                ImageIcon img = new ImageIcon(resizedImg);
+                JLabel label = gridList.get(p.getY()).get(p.getX());
+                label.setIcon(img);
+                label.repaint();
+            }
+        }
     }
     
     public void resetGameScreen(){ // does not reset Tile instance
@@ -104,28 +153,33 @@ public class GameController implements ActionListener, MouseListener{
                         
                     } else if(selectedPlant != null && Tile.getPlant(y, x) == null){
                         if(selectedPlant instanceof SunProducer){
-                            SunProducer selected = (SunProducer) selectedPlant;
-                            SunProducer newP = new SunProducer(selected.getHP(), selected.getSunCost(), selected.getSunProduced(), 
-                                                               selected.getImgFilename(), selected.getSpriteWidth(), selected.getSpriteHeight());
+                            SunProducer s = (SunProducer) selectedPlant;
+                            SunProducer newP = new SunProducer(s.getHP(), s.getSunCost(), s.getSunProduced(), s.getImgFilename(), 
+                                                               s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
+                            newP.setSpriteSheet(s.getSpriteSheet());
                             Tile.addEntity(newP, y, x);
                         } else if(selectedPlant instanceof Shooter){
-                            Shooter selected = (Shooter) selectedPlant;
-                            Shooter newP = new Shooter(selected.getHP(), selected.getSunCost(), selected.getType(), 
-                                                       selected.getImgFilename(), selected.getSpriteWidth(), selected.getSpriteHeight());
+                            Shooter s = (Shooter) selectedPlant;
+                            Shooter newP = new Shooter(s.getHP(), s.getSunCost(), s.getType(), 
+                                                       s.getImgFilename(), s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
+                            newP.setSpriteSheet(s.getSpriteSheet());
                             Tile.addEntity(newP, y, x);
                         } else if(selectedPlant instanceof Defense){
-                            Defense selected = (Defense) selectedPlant;
-                            Defense newP = new Defense(selected.getHP(), selected.getSunCost(), selected.getImgFilename(), 
-                                                       selected.getSpriteWidth(), selected.getSpriteHeight());
+                            Defense s = (Defense) selectedPlant;
+                            Defense newP = new Defense(s.getHP(), s.getSunCost(), s.getImgFilename(), 
+                                                       s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
+                            newP.setSpriteSheet(s.getSpriteSheet());
                             Tile.addEntity(newP, y, x);
                         } else if(selectedPlant instanceof Bomb){
-                            Bomb selected = (Bomb) selectedPlant;
-                            Bomb newP = new Bomb(selected.getHP(), selected.getSunCost(), selected.getChargeUp(), selected.getActive(), 
-                                                 selected.getType(), selected.getImgFilename(), selected.getSpriteWidth(), selected.getSpriteHeight());
+                            Bomb s = (Bomb) selectedPlant;
+                            Bomb newP = new Bomb(s.getHP(), s.getSunCost(), s.getChargeUp(), s.getActive(), 
+                                                 s.getType(), s.getImgFilename(), s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
+                            newP.setSpriteSheet(s.getSpriteSheet());
                             Tile.addEntity(newP, y, x);
                         }
-                        BufferedImage grabbedImg = selectedPlant.getSpriteSheet().grabImage(1, 1, selectedPlant.getSpriteWidth(), selectedPlant.getSpriteHeight());
-                        BufferedImage resizedImg = selectedPlant.getSpriteSheet().resizeImage(75, 100,grabbedImg);
+                        SpriteSheet selectedSheet = selectedPlant.getSpriteSheet();
+                        BufferedImage grabbedImg = selectedSheet.grabImage(1, 1, selectedPlant.getSpriteWidth(), selectedPlant.getSpriteHeight());
+                        BufferedImage resizedImg = selectedSheet.resizeImage(75, 100,grabbedImg);
 
                         JLabel label = gridList.get(y).get(x);
                         label.setIcon(new ImageIcon(resizedImg));
