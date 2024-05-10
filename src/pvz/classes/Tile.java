@@ -160,4 +160,14 @@ public class Tile {
             projectileList.get(i).hit();
         }
     }
+    
+    public static ArrayList<Plant> getPlantList(){
+        return plantList;
+    }
+    public static ArrayList<Zombie> getZombieList(){
+        return zombieList;
+    }
+    public static ArrayList<Projectile> getProjectileList(){
+        return projectileList;
+    }
 }

@@ -7,6 +7,7 @@ package pvz.screens;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,9 +28,10 @@ public class Frame extends JFrame {
     
     public Frame(){
         this.setTitle("Plants vs. Zombies");
+        this.setIconImage(new ImageIcon(getClass().getResource("../imgs/iconImage.png")).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(600, 600);
+//        this.setSize(600, 600);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
         this.getContentPane().setLayout(new CardLayout());
@@ -55,6 +57,6 @@ public class Frame extends JFrame {
         
         this.setVisible(true);
         
-        
+        gamePanel.getController().loopGame();
     }
 }

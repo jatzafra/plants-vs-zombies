@@ -17,14 +17,14 @@ public class Bomb extends Plant{
     private int chargeUp;
     private boolean active;
     
-    public Bomb(int h, int c, int u, boolean a, String t, int sw, int sh){
-        super(h, c, sw, sh);
+    public Bomb(int h, int c, int u, boolean a, String t, int sw, int sh, int maxF){
+        super(h, c, sw, sh, maxF);
         chargeUp = u;
         active = a;
         type = t;
     }
-    public Bomb(int h, int c, int u, boolean a, String t, String f, int sw, int sh){
-        super(h, c, f, sw, sh);
+    public Bomb(int h, int c, int u, boolean a, String t, String f, int sw, int sh, int maxF){
+        super(h, c, f, sw, sh, maxF);
         chargeUp = u;
         active = a;
         type = t;

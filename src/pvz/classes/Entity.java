@@ -14,15 +14,32 @@ import pvz.exceptions.GameOverException;
  */
 public abstract class Entity {
     protected int speed, xCoord, yCoord, zCoord;
-    protected String id;
+//    protected String id;
+    protected String imgFilename;
+    protected SpriteSheet spriteSheet;
+    protected int spriteWidth;
+    protected int spriteHeight;
+    protected int maxAnimFrame;
+    protected int animFrame;
+    protected int frameInterval; // contains frames elapsed after animFrame is updated
     
-    public Entity(int s){
+    public Entity(int s, int sw, int sh, int maxF){
         speed = s;
+        spriteWidth = sw;
+        spriteHeight = sh;
+        maxAnimFrame = maxF;
+        animFrame = 1;
+        frameInterval = 0;
     }
     
-    public Entity(int s, String i){
+    public Entity(int s, String f, int sw, int sh, int maxF){
         speed = s;
-        id = i;
+        imgFilename = f;
+        spriteWidth = sw;
+        spriteHeight = sh;
+        maxAnimFrame = maxF;
+        animFrame = 1;
+        frameInterval = 0;
     }
     
     public void setX(int x){
@@ -34,11 +51,39 @@ public abstract class Entity {
     public void setZ(int z){
         zCoord = z;
     }
-    
     public void setCoords(int x, int y, int z){
         xCoord = x;
         yCoord = y;
         zCoord = z;
+    }
+    public void setSpriteSheet(SpriteSheet s){
+        spriteSheet = s;
+    }
+    public void setSpriteWidth(int w){
+        spriteWidth = w;
+    }
+    public void setSpriteHeight(int h){
+        spriteWidth = h;
+    }
+    public void setAnimFrame(int f){
+        animFrame = f;
+    }
+    public void incAnimFrame(){ // when greater than or equal to max sprite frames in spritesheet, sets back to 1
+        if(animFrame < maxAnimFrame){
+            animFrame++;
+        }
+        else{
+            animFrame = 1;
+        }
+    }
+    public void setFrameInterval(int i){
+        frameInterval = i;
+    }
+    public void incFrameInterval(){
+        frameInterval++;
+    }
+    public void setMaxAnimFrame(int mf){
+        maxAnimFrame = mf;
     }
     
     public int getX(){
@@ -50,8 +95,26 @@ public abstract class Entity {
     public int getZ(){
         return zCoord;
     }
-    public String getId(){
-        return id;
+    public String getImgFilename(){
+        return imgFilename;
+    }
+    public SpriteSheet getSpriteSheet(){
+        return spriteSheet;
+    }
+    public int getSpriteWidth(){
+        return spriteWidth;
+    }
+    public int getSpriteHeight(){
+        return spriteHeight;
+    }
+    public int getAnimFrame(){
+        return animFrame;
+    }
+    public int getFrameInterval(){
+        return frameInterval;
+    }
+    public int getMaxAnimFrame(){
+        return maxAnimFrame;
     }
     
     public void move() throws GameOverException{

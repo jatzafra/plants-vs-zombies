@@ -16,8 +16,15 @@ public class Projectile extends Entity {
     private int atk;
     private Entity target;
     
-    public Projectile(int s, String i, int a, String t){
-        super(s, i);
+    // - - - - - - - *TEMPORARY* - - - - - - - 
+    public Projectile(int s, int a, String t){
+        super(s, "../imgs/wireframe.jpg", 25, 25, 1);
+        atk = a;
+        type = t;
+    }
+    
+    public Projectile(int s, int a, String t, String f, int sw, int sh, int maxF){
+        super(s, f, sw, sh, maxF);
         atk = a;
         type = t;
     }
