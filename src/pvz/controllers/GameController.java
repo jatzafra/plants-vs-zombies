@@ -80,7 +80,7 @@ public class GameController implements ActionListener, MouseListener{
             
             // special frame intervals
             if(p instanceof SunProducer){
-                maxFrameInterval = 30;
+                maxFrameInterval = 18;
             }
             
             if(p.getFrameInterval() < maxFrameInterval){ // plant's frames update after every 30 frames
