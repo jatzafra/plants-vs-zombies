@@ -55,7 +55,7 @@ public class PausePanel extends JPanel {
 //        buttonPanel.setBackground(Color.red);
         
         pauseIcon = new JLabel(getScaledIcon(wireframeIcon, 100, 120));
-        pauseText = new JLabel("I don't know what to put here yet.");
+        pauseText = new JLabel("Game Paused. What would you like to do?");
         play = new JButton("Play");
         restart = new JButton("Restart");
         exit = new JButton("Exit");
