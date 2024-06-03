@@ -31,9 +31,14 @@ public class PauseController implements ActionListener{
         exit = e;
     }
     
+    public void setGameController(GameController c){
+        gameController = c;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == play || e.getSource() == restart){
+            gameController.setUnpaused(true);
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "gamePanel");
         }

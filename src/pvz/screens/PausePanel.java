@@ -104,6 +104,9 @@ public class PausePanel extends JPanel {
         this.add(Box.createVerticalGlue());
     }
     
+    public PauseController getController(){
+        return controller;
+    }
     public void addPauseController(){
         controller = new PauseController(frame, this, play, restart, exit);
         

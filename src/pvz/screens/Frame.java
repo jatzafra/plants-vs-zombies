@@ -6,7 +6,9 @@ package pvz.screens;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,8 +33,10 @@ public class Frame extends JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("../imgs/iconImage.png")).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-//        this.setSize(600, 600);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setSize(1400, 832); //800 + 32 from title bar
+        this.setPreferredSize(new Dimension(1400, 832));
+        this.setLocationRelativeTo(null);
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        this.setUndecorated(true);
         this.getContentPane().setLayout(new CardLayout());
         
@@ -54,7 +58,15 @@ public class Frame extends JFrame {
         this.getContentPane().add("pausePanel", pausePanel);
         this.getContentPane().add("creditsPanel", creditsPanel);
         
+        menuPanel.getController().setGameController(gamePanel.getController());
+        pausePanel.getController().setGameController(gamePanel.getController());
+        
         this.setVisible(true);
+//        
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        double width = screenSize.getWidth();
+//        double height = screenSize.getHeight();
+//        System.out.println("width: " + width + " height: " + height);
         
         gamePanel.getController().loopGame();
     }

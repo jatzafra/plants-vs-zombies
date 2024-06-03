@@ -105,6 +105,11 @@ public class MenuPanel extends JPanel {
         this.add(boxPanel, BorderLayout.EAST);
     }
     
+    
+    public MenuController getController(){
+        return controller;
+    }
+    
     public void addMenuController(){
         controller = new MenuController(this, nameField, enterName, credits, easy, normal, hard, frame);
         

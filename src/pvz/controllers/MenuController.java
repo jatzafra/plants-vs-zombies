@@ -25,6 +25,7 @@ public class MenuController implements ActionListener{
     private JTextField nameField;
     private JButton enterName, credits, easy, normal, hard;
     private Frame frame;
+    private GameController gameController;
     
     private String name;
     
@@ -39,6 +40,10 @@ public class MenuController implements ActionListener{
         frame = f;
     }
     
+    public void setGameController(GameController c){
+        gameController = c;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == credits){
@@ -46,16 +51,19 @@ public class MenuController implements ActionListener{
             cardLayout.show(frame.getContentPane(), "creditsPanel");
         }
         else if(e.getSource() == easy){
+            gameController.setUnpaused(true);
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "gamePanel");
             String difficulty = "easy"; //kind of a placeholder cuz idk how to indicate the change in difficulty
         }
         else if(e.getSource() == normal){
+            gameController.setUnpaused(true);
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "gamePanel");
             String difficulty = "normal";
         }
         else if(e.getSource() == hard){
+            gameController.setUnpaused(true);
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "gamePanel");
             String difficulty = "hard";
