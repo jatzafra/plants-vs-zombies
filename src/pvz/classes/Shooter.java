@@ -25,12 +25,12 @@ public class Shooter extends Plant{
     }
     
     public void shoot(){
-        //generate a projectile
-        projectileCounter++;
-        
-        Projectile projectile = new Projectile(1, 10, type);
-        Tile.addEntity(projectile, xCoord, yCoord);
-        System.out.println("Shooter made Projectile."); //removable
+//        //generate a projectile
+//        projectileCounter++;
+//        
+//        Projectile projectile = new Projectile(1, 10, type);
+//        Tile.addEntity(projectile, xCoord, yCoord);
+//        System.out.println("Shooter made Projectile."); //removable
     }
     
     public String getType(){

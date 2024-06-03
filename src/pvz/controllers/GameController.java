@@ -13,6 +13,7 @@ import pvz.classes.Shooter;
 import pvz.classes.SunProducer;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
@@ -21,11 +22,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import pvz.classes.SpriteSheet;
+import pvz.classes.Zombie;
 
 /**
  *
@@ -36,30 +39,80 @@ public class GameController implements ActionListener, MouseListener{
     private JPanel panel;
     private JButton shovelBox, pauseBox;
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
+    private ArrayList<JPanel> rowList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
-    private Plant selectedPlant;
-    private boolean shovelActive = false;
+    private Plant selectedPlant, newPlant;
+    private SpriteSheet newPlantSprite, newProjectileSprite, newZombieSprite;
+    private boolean unpaused, shovelActive = false;
+    private int selectedX = -1, selectedY = -1;
     
-    private int frames;
     private long lastFrame;
     private double timePerFrame;
     private long lastUpdate;
     private double timePerUpdate;
     
-    public GameController(Frame f, JPanel m, JButton s, JButton p, ArrayList<JButton> plist, ArrayList<ArrayList<JLabel>> glist){
+    private boolean test = true;
+    
+    public GameController(Frame f, JPanel m, JButton s, JButton p, ArrayList<JButton> plist, ArrayList<JPanel> rlist, ArrayList<ArrayList<JLabel>> glist){
         frame = f;
         panel = m;
         shovelBox = s;
         pauseBox = p;
         plantButtonList = plist;
+        rowList = rlist;
         gridList = glist;
+        unpaused = false;
         timePerFrame = 1000000000.0 / 120.0; //120 per sec
         timePerUpdate = 1000000000.0 / 60.0; //60 per sec
     }
     
     public void loopGame(){
         while(true){
+            if(System.nanoTime() >= 2000000000.0 && test){
+                test = false;
+                Zombie z = (Zombie) Zombie.getUsedZombies().get(2);
+                Tile.addAbsoluteEntity(z, 0, 500);
+                
+                newZombieSprite = z.getSpriteSheet();
+                BufferedImage grabbedImg = newZombieSprite.grabImage(1, 1, z.getSpriteWidth(), z.getSpriteHeight());
+                BufferedImage resizedImg = newZombieSprite.resizeImage(135, 180,grabbedImg);
+                
+                JLabel zLabel = new JLabel();
+                zLabel.setIcon(new ImageIcon(resizedImg));
+                z.setZombieLabel(zLabel);
+                rowList.get(z.getAbsoluteY() + 1).add(zLabel);
+                zLabel.setBounds(z.getAbsoluteX(), -47, 180, 250);
+                newZombieSprite = null;
+                
+                Zombie z1 = (Zombie) Zombie.getUsedZombies().get(1);
+                Tile.addAbsoluteEntity(z1, 0, 500);
+                
+                newZombieSprite = z1.getSpriteSheet();
+                BufferedImage grabbedImg1 = newZombieSprite.grabImage(1, 1, z1.getSpriteWidth(), z1.getSpriteHeight());
+                BufferedImage resizedImg1 = newZombieSprite.resizeImage(135, 180,grabbedImg1);
+                
+                JLabel zLabel1 = new JLabel();
+                zLabel1.setIcon(new ImageIcon(resizedImg1));
+                z1.setZombieLabel(zLabel1);
+                rowList.get(z.getAbsoluteY() + 2).add(zLabel1);
+                zLabel1.setBounds(z.getAbsoluteX(), -47, 180, 250);
+                newZombieSprite = null;
+                
+                Zombie z2 = (Zombie) Zombie.getUsedZombies().get(0);
+                Tile.addAbsoluteEntity(z2, 0, 500);
+                
+                newZombieSprite = z2.getSpriteSheet();
+                BufferedImage grabbedImg2 = newZombieSprite.grabImage(1, 1, z.getSpriteWidth(), z.getSpriteHeight());
+                BufferedImage resizedImg2 = newZombieSprite.resizeImage(135, 180,grabbedImg2);
+                
+                JLabel zLabel2 = new JLabel();
+                zLabel2.setIcon(new ImageIcon(resizedImg2));
+                z2.setZombieLabel(zLabel2);
+                rowList.get(z.getAbsoluteY() + 3).add(zLabel2);
+                zLabel2.setBounds(z.getAbsoluteX(), -47, 180, 250);
+                newZombieSprite = null;
+            }
             if(System.nanoTime() - lastUpdate >= timePerUpdate){
                 lastUpdate = System.nanoTime();
                 updateGame();
@@ -72,18 +125,42 @@ public class GameController implements ActionListener, MouseListener{
     }
     
     public void updateGame(){
-        
+        if(selectedX >= 0 && selectedY >= 0){
+            if(shovelActive == true && Tile.getPlant(selectedY, selectedX) != null){
+                gridList.get(selectedY).get(selectedX).setIcon(null); //view
+                Tile.removeGridEntity(selectedY, selectedX); //model
+                
+                shovelActive = false;
+                selectedX = -1; selectedY = -1;
+            }
+            if(newPlant != null){
+                Tile.addGridEntity(newPlant, selectedY, selectedX);
+                
+                BufferedImage grabbedImg = newPlantSprite.grabImage(1, 1, newPlant.getSpriteWidth(), newPlant.getSpriteHeight());
+                BufferedImage resizedImg = newPlantSprite.resizeImage(75, 100,grabbedImg);
+
+                JLabel label = gridList.get(selectedY).get(selectedX);
+                label.setIcon(new ImageIcon(resizedImg));
+                label.repaint();
+                
+                newPlant = null;
+                selectedX = -1; selectedY = -1;
+            }
+        }
+        for(Zombie z : Tile.getZombieList()){
+            
+        }
     }
     public void nextFrame(){
         for(Plant p : Tile.getPlantList()){
             int maxFrameInterval = 18; // standard frame interval
             
             // special frame intervals
-            if(p instanceof SunProducer){
-                maxFrameInterval = 18;
+            if(p instanceof Defense){
+                maxFrameInterval = 30;
             }
             
-            if(p.getFrameInterval() < maxFrameInterval){ // plant's frames update after every 30 frames
+            if(p.getFrameInterval() < maxFrameInterval){ // plant's frames update after every 18 frames
                 p.incFrameInterval();
             } else{ 
                 p.setFrameInterval(0);
@@ -97,9 +174,25 @@ public class GameController implements ActionListener, MouseListener{
                 label.repaint();
             }
         }
+        for(Zombie z : Tile.getZombieList()){
+            int maxFrameInterval = 36;
+            
+            if(z.getFrameInterval() < maxFrameInterval){
+                z.incFrameInterval();
+            } else{
+                z.setFrameInterval(0);
+                z.incAnimFrame();
+                
+                BufferedImage grabbedImg = z.getSpriteSheet().grabImage(z.getAnimFrame(), 1, z.getSpriteWidth(), z.getSpriteHeight());
+                BufferedImage resizedImg = z.getSpriteSheet().resizeImage(135, 180,grabbedImg);
+                ImageIcon img = new ImageIcon(resizedImg);
+                JLabel label = z.getZombieLabel();
+                label.setIcon(img);
+            }
+        }
     }
     
-    public void resetGameScreen(){ // does not reset Tile instance
+    public void resetGameScreen(){ // does NOT reset Tile instance
         
         /* FOR PLANT INVENTORY RESET | NOT COMPLETELY FUNCTIONAL NOR NEEDED 
         for(JButton b : plantButtonList){
@@ -113,19 +206,31 @@ public class GameController implements ActionListener, MouseListener{
                 gridList.get(y).get(x).setIcon(null);
             }
         }
+        for(Zombie z : Tile.getZombieList()){
+            JLabel label = z.getZombieLabel();
+            label.setIcon(null);
+            rowList.get(z.getAbsoluteY()).remove(label);
+        }
         
     }
+    
+    public void setUnpaused(boolean u){
+        unpaused = u;
+    }
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
         selectedPlant = null;
         shovelActive = false;
+        selectedX = -1; selectedY = -1;
         
         if(e.getSource() == shovelBox){
             shovelActive = true;
         }
         
         if(e.getSource() == pauseBox){
+            unpaused = false;
             CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
             cardLayout.show(frame.getContentPane(), "pausePanel");
         }
@@ -146,47 +251,46 @@ public class GameController implements ActionListener, MouseListener{
             for(int x = 0; x < gridList.get(y).size(); x++){
                 if(e.getSource() == gridList.get(y).get(x)){
 //                    System.out.println("clicked on gridList from " + y + ", " + x);
-                    if(shovelActive == true && Tile.getPlant(y, x) != null){
-                        gridList.get(y).get(x).setIcon(null); //view
-                        Tile.removeEntity(Tile.getPlant(y, x), y, x); //model
-                        
+                    selectedX = x; selectedY = y;
+                    
+                    if(shovelActive == true && Tile.getPlant(y, x) == null){
                         shovelActive = false;
-                        
-                    } else if(selectedPlant != null && Tile.getPlant(y, x) == null){
+                    }
+                    
+                    if(selectedPlant != null && Tile.getPlant(y, x) == null){
                         if(selectedPlant instanceof SunProducer){
                             SunProducer s = (SunProducer) selectedPlant;
                             SunProducer newP = new SunProducer(s.getHP(), s.getSunCost(), s.getSunProduced(), s.getImgFilename(), 
                                                                s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
                             newP.setSpriteSheet(s.getSpriteSheet());
-                            Tile.addEntity(newP, y, x);
+//                            Tile.addEntity(newP, y, x);
+                            newPlant = newP;
                         } else if(selectedPlant instanceof Shooter){
                             Shooter s = (Shooter) selectedPlant;
                             Shooter newP = new Shooter(s.getHP(), s.getSunCost(), s.getType(), 
                                                        s.getImgFilename(), s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
                             newP.setSpriteSheet(s.getSpriteSheet());
-                            Tile.addEntity(newP, y, x);
+//                            Tile.addEntity(newP, y, x);
+                            newPlant = newP;
                         } else if(selectedPlant instanceof Defense){
                             Defense s = (Defense) selectedPlant;
                             Defense newP = new Defense(s.getHP(), s.getSunCost(), s.getImgFilename(), 
                                                        s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
                             newP.setSpriteSheet(s.getSpriteSheet());
-                            Tile.addEntity(newP, y, x);
+//                            Tile.addEntity(newP, y, x);
+                            newPlant = newP;
                         } else if(selectedPlant instanceof Bomb){
                             Bomb s = (Bomb) selectedPlant;
                             Bomb newP = new Bomb(s.getHP(), s.getSunCost(), s.getChargeUp(), s.getActive(), 
                                                  s.getType(), s.getImgFilename(), s.getSpriteWidth(), s.getSpriteHeight(), s.getMaxAnimFrame());
                             newP.setSpriteSheet(s.getSpriteSheet());
-                            Tile.addEntity(newP, y, x);
+//                            Tile.addEntity(newP, y, x);
+                            newPlant = newP;
                         }
-                        SpriteSheet selectedSheet = selectedPlant.getSpriteSheet();
-                        BufferedImage grabbedImg = selectedSheet.grabImage(1, 1, selectedPlant.getSpriteWidth(), selectedPlant.getSpriteHeight());
-                        BufferedImage resizedImg = selectedSheet.resizeImage(75, 100,grabbedImg);
-
-                        JLabel label = gridList.get(y).get(x);
-                        label.setIcon(new ImageIcon(resizedImg));
-                        label.repaint();
-                        selectedPlant = null;
+                        newPlantSprite = selectedPlant.getSpriteSheet();
                     }
+                    
+                    selectedPlant = null;
                 }
             }
         }

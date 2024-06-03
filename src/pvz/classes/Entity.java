@@ -13,7 +13,8 @@ import pvz.exceptions.GameOverException;
  * @author Lenovo
  */
 public abstract class Entity {
-    protected int speed, xCoord, yCoord, zCoord;
+    protected int xCoord, yCoord;
+    protected double speed; // squares per second (has direction [+/-])
 //    protected String id;
     protected String imgFilename;
     protected SpriteSheet spriteSheet;
@@ -23,7 +24,7 @@ public abstract class Entity {
     protected int animFrame;
     protected int frameInterval; // contains frames elapsed after animFrame is updated
     
-    public Entity(int s, int sw, int sh, int maxF){
+    public Entity(float s, int sw, int sh, int maxF){
         speed = s;
         spriteWidth = sw;
         spriteHeight = sh;
@@ -32,7 +33,7 @@ public abstract class Entity {
         frameInterval = 0;
     }
     
-    public Entity(int s, String f, int sw, int sh, int maxF){
+    public Entity(float s, String f, int sw, int sh, int maxF){
         speed = s;
         imgFilename = f;
         spriteWidth = sw;
@@ -48,13 +49,9 @@ public abstract class Entity {
     public void setY(int y){
         yCoord = y;
     }
-    public void setZ(int z){
-        zCoord = z;
-    }
-    public void setCoords(int x, int y, int z){
+    public void setCoords(int y, int x){
         xCoord = x;
         yCoord = y;
-        zCoord = z;
     }
     public void setSpriteSheet(SpriteSheet s){
         spriteSheet = s;
@@ -92,9 +89,6 @@ public abstract class Entity {
     public int getY(){
         return yCoord;
     }
-    public int getZ(){
-        return zCoord;
-    }
     public String getImgFilename(){
         return imgFilename;
     }
@@ -119,34 +113,34 @@ public abstract class Entity {
     
     public void move() throws GameOverException{
         if(speed < 0){
-            if(this instanceof Zombie && xCoord == 0){
-                System.out.println("GAMEOVER");
-                throw new GameOverException();
-            }
-            
-            int oldXCoord = xCoord, oldYCoord = yCoord;
-            int newXCoord = xCoord - 1, newYCoord = yCoord;
-            
-            Tile.removeEntity(this, xCoord, yCoord);
-            Tile.addEntity(this, newXCoord, newYCoord);
-            
-            // Update 'zCoord' values of Entities that shifted downwards due to removal
-            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
-                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
-            }
+//            if(this instanceof Zombie && xCoord == 0){
+//                System.out.println("GAMEOVER");
+//                throw new GameOverException();
+//            }
+//            
+//            int oldXCoord = xCoord, oldYCoord = yCoord;
+//            int newXCoord = xCoord - 1, newYCoord = yCoord;
+//            
+//            Tile.removeEntity(this, xCoord, yCoord);
+//            Tile.addEntity(this, newXCoord, newYCoord);
+//            
+//            // Update 'zCoord' values of Entities that shifted downwards due to removal
+//            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
+//                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
+//            }
             
         } else if(speed > 0){
             
-            int oldXCoord = xCoord, oldYCoord = yCoord;
-            int newXCoord = xCoord + 1, newYCoord = yCoord;
-            
-            Tile.removeEntity(this, xCoord, yCoord);
-            Tile.addEntity(this, newXCoord, newYCoord);
-            
-            // Update 'zCoord' values of Entities that shifted downwards due to removal
-            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
-                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
-            }
+//            int oldXCoord = xCoord, oldYCoord = yCoord;
+//            int newXCoord = xCoord + 1, newYCoord = yCoord;
+//            
+//            Tile.removeEntity(this, xCoord, yCoord);
+//            Tile.addEntity(this, newXCoord, newYCoord);
+//            
+//            // Update 'zCoord' values of Entities that shifted downwards due to removal
+//            for(int i = 0; i < Tile.getEntities(oldXCoord, oldYCoord).size(); i++){
+//                Tile.getEntities(oldXCoord, oldYCoord).get(i).setZ(i);
+//            }
         }
     }
 }

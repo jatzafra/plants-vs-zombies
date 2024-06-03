@@ -37,18 +37,21 @@ public class GamePanel extends JPanel {
     // - - - - - - - Declare Components - - - - - - - 
     private Frame frame;
     private JLayeredPane layeredPane;
-    private JPanel background, gameLayer;
+    private JPanel background, movingEntities, gameLayer;
     private GameController controller;
     private JButton sunBox, shovelBox, pauseBox;
     
     private ImageIcon wireframeIcon = new ImageIcon(getClass().getResource("../imgs/wireframe.jpg"));
     
     private ArrayList<JButton> plantButtonList = new ArrayList<>();
+    private ArrayList<JPanel> rowList = new ArrayList<>();
     private ArrayList<ArrayList<JLabel>> gridList;
     
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    double width = screenSize.getWidth();
-    double height = screenSize.getHeight();
+//    double width = screenSize.getWidth();
+//    double height = screenSize.getHeight();
+    double width = 1400;
+    double height = 800;
     
     public GamePanel(Frame f){
         this.frame = f;
@@ -60,22 +63,27 @@ public class GamePanel extends JPanel {
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, (int)width, (int)height);
         
-        // - - - - - - - BackgroundLayer - - - - - - -
+        // - - - - - - - Background Layer - - - - - - -
         background = new JPanel();
         background.setLayout(null);
         background.setBounds(0, 0, (int)width, (int)height);
-        
-//        ImageIcon bg = new ImageIcon(getClass().getResource("../imgs/pvz_backgroundTemp.png"));        
+            
         ImageIcon bg = new ImageIcon(getClass().getResource("../imgs/garden_draft.png"));
-        ImageIcon resizedBg = getScaledIcon(bg, 2219, 850);
+        ImageIcon resizedBg = getScaledIcon(bg, 2073, 800); //original dimensions are 2060x795
         
         JLabel bgLabel = new JLabel();
-        bgLabel.setBounds(-200, 0, 2219, 850);
+        bgLabel.setBounds(-200, 0, 2073, 800);
         bgLabel.setIcon(resizedBg);
         bgLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
         bgLabel.setHorizontalAlignment(JLabel.LEFT);
         bgLabel.setVerticalAlignment(JLabel.TOP);
         background.add(bgLabel);
+        
+        // - - - - - - - MovingEntities Layer - - - - - - -
+        movingEntities = new JPanel();
+        movingEntities.setLayout(null);
+        movingEntities.setBounds(0, 0, (int)width, (int)height);
+        movingEntities.setOpaque(false);
         
         // - - - - - - - GameLayer - - - - - - -
         gameLayer = new JPanel();
@@ -84,11 +92,26 @@ public class GamePanel extends JPanel {
         gameLayer.setOpaque(false);
         gameLayer.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
         
-        // - - - - - - - BoxLayout Subpanel North - - - - - - -
+        // - - - - - - - BoxLayout Game Subpanel - - - - - - -
+        JLayeredPane gameBoxPanel = new JLayeredPane();
+        gameBoxPanel.setLayout(null);
+        gameBoxPanel.setOpaque(false);
         
-        JPanel boxPanel = new JPanel();
-        boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.X_AXIS));
-        boxPanel.setOpaque(false);
+        for(int y = 0; y < 5; y++){
+            JPanel entityPanel = new JPanel();
+            entityPanel.setLayout(null);
+            entityPanel.setOpaque(false);
+            entityPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            entityPanel.setBounds(5*y, 110*y, 1100, 167);
+            
+            rowList.add(entityPanel);
+        }
+        
+        // - - - - - - - BoxLayout Plant Subpanel North - - - - - - -
+        
+        JPanel plantBoxPanel = new JPanel();
+        plantBoxPanel.setLayout(new BoxLayout(plantBoxPanel, BoxLayout.X_AXIS));
+        plantBoxPanel.setOpaque(false);
         
         sunBox = new JButton();
         sunBox.setText("#Sun");
@@ -121,7 +144,7 @@ public class GamePanel extends JPanel {
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(5, 9));
         gridPanel.setOpaque(false);
-        gridPanel.setBorder(BorderFactory.createEmptyBorder(70, 340, 84, 120));
+        gridPanel.setBorder(BorderFactory.createEmptyBorder(56, 307, 64, 94));
         
         for(int y = 0; y < 5; y++){
             ArrayList<JLabel> innerArr = new ArrayList<>();
@@ -131,7 +154,7 @@ public class GamePanel extends JPanel {
                 
                 label.setHorizontalAlignment(JLabel.CENTER);
                 label.setVerticalAlignment(JLabel.CENTER);
-                label.setBorder(BorderFactory.createLineBorder(Color.black));
+//                label.setBorder(BorderFactory.createLineBorder(Color.black));
                 
                 innerArr.add(label);
             }
@@ -141,33 +164,43 @@ public class GamePanel extends JPanel {
         
         // - - - - - - - Add Components in Subpanels - - - - - - -
         
-        boxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
-        boxPanel.add(sunBox);
-        boxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        plantBoxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        plantBoxPanel.add(sunBox);
+        plantBoxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
         
         for(JButton b : plantButtonList){
-            boxPanel.add(b);
+            plantBoxPanel.add(b);
         }
         
-        boxPanel.add(Box.createHorizontalGlue());
+        plantBoxPanel.add(Box.createHorizontalGlue());
         
-        boxPanel.add(shovelBox);
-        boxPanel.add(pauseBox);
-        boxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        plantBoxPanel.add(shovelBox);
+        plantBoxPanel.add(pauseBox);
+        plantBoxPanel.add(Box.createRigidArea(new Dimension(20, 0)));
+        
+        for(int y = 0; y < rowList.size(); y++){
+            JPanel p = rowList.get(y);
+            gameBoxPanel.add(p, Integer.valueOf(y));
+        }
         
         for(int y = 0; y < gridList.size(); y++){
             for(int x = 0; x < gridList.get(y).size(); x++){
                 gridPanel.add(gridList.get(y).get(x));
             }
         }
-            
-        // - - - - - - - Add Subpanels in GameLayer - - - - - - -
-        gameLayer.add(boxPanel, BorderLayout.NORTH);
+        
+        // - - - - - - - Add Subpanels in MovingEntities Layer - - - - - - -
+        movingEntities.add(gameBoxPanel);
+        gameBoxPanel.setBounds(280, 130, 1100, 700);
+        
+        // - - - - - - - Add Subpanels in Game Layer - - - - - - -
+        gameLayer.add(plantBoxPanel, BorderLayout.NORTH);
         gameLayer.add(gridPanel, BorderLayout.CENTER);
         
         // - - - - - - - Add Layers to LayeredPane - - - - - - - 
         layeredPane.add(background, Integer.valueOf(0));
-        layeredPane.add(gameLayer, Integer.valueOf(2));
+        layeredPane.add(gameLayer, Integer.valueOf(1));
+        layeredPane.add(movingEntities, Integer.valueOf(2));
         
         // - - - - - - - Add LayeredPane to GamePanel - - - - - - - 
         this.add(layeredPane);
@@ -178,7 +211,7 @@ public class GamePanel extends JPanel {
     }
     
     public void addGameController(){
-        controller = new GameController(frame, this, shovelBox, pauseBox, plantButtonList, gridList);
+        controller = new GameController(frame, this, shovelBox, pauseBox, plantButtonList, rowList, gridList);
         
         shovelBox.addActionListener(controller);
         pauseBox.addActionListener(controller);

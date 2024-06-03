@@ -25,14 +25,22 @@ public class PvZ {
         BufferedImageLoader imgLoader = new BufferedImageLoader();
         
         SunProducer sunflower = new SunProducer(300, 50, 50, "sunflower_idle.png", 900, 1200, 12);
-        Shooter peashooter = new Shooter(350, 100, "straight", "peashooter_idle.png", 900, 1200, 12);
-        Defense walnut = new Defense(3000, 50, "wallnut_idle.png", 900, 1200, 1);
-        Bomb cherry = new Bomb(1, 150, 0, true, "cherry", "cherrybomb_draft.png", 900, 1200, 1);
+        Shooter peashooter = new Shooter(300, 100, "straight", "peashooter_idle.png", 900, 1200, 12);
+        Defense walnut = new Defense(4000, 50, "wallnut_idle.png", 390, 520, 12);
+        Bomb cherry = new Bomb(9999, 150, 0, true, "cherry", "cherrybomb_draft.png", 900, 1200, 1);
+        
+        Zombie basic = new Zombie("basic", 190, 100, (float) -5.0, "zombie_walk.png", 900, 1200, 8);
+        Zombie conehead = new Zombie("conehead", 560, 100, (float) -5.0, "conehead_walk.png", 900, 1200, 8);
+        Zombie buckethead = new Zombie("buckethead", 1290, 100, (float) -5.0, "buckethead_walk.png", 900, 1200, 8);
         
         Plant.addUsedPlants(sunflower);
         Plant.addUsedPlants(peashooter);
         Plant.addUsedPlants(walnut);
         Plant.addUsedPlants(cherry);
+        
+        Zombie.addUsedZombies(basic);
+        Zombie.addUsedZombies(conehead);
+        Zombie.addUsedZombies(buckethead);
         
         for(Object o : Plant.getUsedPlants()){
             Plant p = (Plant) o;
@@ -47,56 +55,22 @@ public class PvZ {
                 e.printStackTrace();
             }
         }
+        for(Object o : Zombie.getUsedZombies()){
+            Zombie z = (Zombie) o;
+            
+            try {
+                SpriteSheet sheet = new SpriteSheet(imgLoader.loadImage("/imgs/" + z.getImgFilename()));
+                int width, height;
+//                Image img = imgLoader.loadImage("/imgs/" + p.getImgFilename());
+//                System.out.println(p.getImgFilename() + " - " + img.getWidth(null) + ", " + img.getHeight(null));
+                z.setSpriteSheet(sheet);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         
         Frame frame = new Frame();
         
-        /*
-        //Scenario 1
-        SunProducer sunflower = new SunProducer(300, 50, 50);
-        Tile.addEntity(sunflower, 0, 0);
-        sunflower.generateSun();
-        System.out.println("Sun: " + Plant.getSun());
-        sunflower.generateSun();
-        System.out.println("Sun: " + Plant.getSun());
-        sunflower.generateSun();
-        System.out.println("Sun: " + Plant.getSun());
-        System.out.println("scenario 1 end");
-        
-        //Scenario 2
-        Shooter peashooter = new Shooter(350, 100, "straight");
-        Zombie normal = new Zombie("normal", 50, 50, -2);
-        
-        Tile.addEntity(peashooter, 3, 3);
-        Tile.addEntity(normal, 6, 3);
-        
-        while(peashooter.getHP() > 0 && normal.getHP() > 0){
-            peashooter.shoot();
-            Tile.hitAllProjectiles();
-            Tile.moveAllProjectiles();
-            Tile.hitAllProjectiles();
-            Tile.moveAllZombies();
-            Tile.hitAllProjectiles();
-            
-            System.out.println("normal zombie Coords: " + normal.getX() + ", " + normal.getY());
-            System.out.println("normal zombie HP: " + normal.getHP());
-        }
-        System.out.println("scenario 2 end");
-        
-        //Scenario 3
-        Defense wallnut = new Defense(3000, 50);
-        Zombie buckethead = new Zombie("buckethead", 500, 50, -2);
-        
-        Tile.addEntity(wallnut, 4, 4);
-        Tile.addEntity(buckethead, 4, 4);
-        
-        buckethead.targetPlant();
-        
-        while(wallnut.getHP() > 0){
-            buckethead.eatPlant();
-            System.out.println("wallnut HP: " + wallnut.getHP());
-        }
-        System.out.println("scenario 3 end");
-        */
     }
     
 }
