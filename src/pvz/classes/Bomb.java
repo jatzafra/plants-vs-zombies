@@ -27,7 +27,15 @@ public class Bomb extends Plant{
     private boolean active;
     
     /**
-     * constructor method for the Bomb class
+     * constructor method for Bomb class
+     * @param h hit points for Bomb
+     * @param c sun cost of Bomb
+     * @param u chargeUp of Bomb
+     * @param a active value of Bomb
+     * @param t type of Bomb
+     * @param sw sprite width of Bomb
+     * @param sh sprite height of Bomb
+     * @param maxF max frame animations of Bomb
      */
     public Bomb(int h, int c, int u, boolean a, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
@@ -36,7 +44,16 @@ public class Bomb extends Plant{
         type = t;
     }
     /**
-     * constructor method for the Bomb class
+     * constructor method for Bomb class
+     * @param h hit points for Bomb
+     * @param c sun cost of Bomb
+     * @param u chargeUp of Bomb
+     * @param a active value of Bomb
+     * @param t type of Bomb
+     * @param f image file name for Bomb's sprites
+     * @param sw sprite width of Bomb
+     * @param sh sprite height of Bomb
+     * @param maxF max frame animations of Bomb
      */
     public Bomb(int h, int c, int u, boolean a, String t, String f, int sw, int sh, int maxF){
         super(h, c, f, sw, sh, maxF);
@@ -48,7 +65,6 @@ public class Bomb extends Plant{
     
     /**
      * this method makes "active" true if the Bomb is an insta type or if there is a nearby Zombie
-     * @return null
      */
     public void activate(){
 //        if(Tile.getFirstZombieInTile(this.getX(), this.getY()) != null || type == "insta"){
@@ -58,7 +74,6 @@ public class Bomb extends Plant{
     
     /**
      * this method allows the Bomb to detonate and kill all zombies within a range if it is active
-     * @return null
      */
     public void explode(){ 
 //        if(active){

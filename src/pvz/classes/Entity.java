@@ -72,10 +72,10 @@ public abstract class Entity {
     
     /**
      * constructor method for Entity
-     * @param s
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param s speed of Entity
+     * @param sw sprite width of Entity
+     * @param sh sprite height of Entity
+     * @param maxF max animation frames of Entity
      */
     public Entity(double s, int sw, int sh, int maxF){
         speed = s;
@@ -88,11 +88,11 @@ public abstract class Entity {
     
     /**
      * constructor method for Entity
-     * @param s
-     * @param f
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param s speed of Entity
+     * @param f image file name for Entity's sprites
+     * @param sw sprite width of Entity
+     * @param sh sprite height of Entity
+     * @param maxF max animation frames of Entity
      */
     public Entity(double s, String f, int sw, int sh, int maxF){
         speed = s;
@@ -106,7 +106,6 @@ public abstract class Entity {
     
     /**
      * sets the gamePanel 
-     * @return null
      */
     public static void setGamePanel(GamePanel gp){
         gamePanel = gp;
@@ -120,25 +119,22 @@ public abstract class Entity {
     }
     /**
      * sets the x coordinate of the Entity
-     * @param x
-     * @return null
+     * @param x new x coordinate
      */
     public void setX(int x){
         xCoord = x;
     }
     /**
      * sets the y coordinate of the Entity
-     * @param y
-     * @return null
+     * @param y new y coordinate
      */
     public void setY(int y){
         yCoord = y;
     }
     /**
      * sets the x and y coordinates of an Entity
-     * @param x
-     * @param y
-     * @return null
+     * @param x new xCoord
+     * @param y new yCoord
      */
     public void setCoords(int y, int x){
         xCoord = x;
@@ -146,40 +142,35 @@ public abstract class Entity {
     }
     /**
      * sets the speed of the Entity
-     * @param s
-     * @return null
+     * @param s new speed
      */
     public void setSpeed(int s){
         speed = s;
     }
     /**
      * sets the SpriteSheet of the Entity
-     * @param s
-     * @return null
+     * @param s new SpriteSheet
      */
     public void setSpriteSheet(SpriteSheet s){
         spriteSheet = s;
     }
     /**
      * sets the width of the Entity's sprite
-     * @param w
-     * @return null
+     * @param w new width
      */
     public void setSpriteWidth(int w){
         spriteWidth = w;
     }
     /**
      * sets the height of the Entity's sprite
-     * @param h
-     * @return null
+     * @param h new height
      */
     public void setSpriteHeight(int h){
         spriteWidth = h;
     }
     /**
      * sets the animation frame of the Entity
-     * @param f
-     * @return null
+     * @param f new animation frame
      */
     public void setAnimFrame(int f){
         animFrame = f;
@@ -187,7 +178,6 @@ public abstract class Entity {
     /**
      * increases the animation frame of the Entity if it is less than the max animation frame
      * else, the animation frame will be = 1
-     * @return null
      */
     public void incAnimFrame(){ // when greater than or equal to max sprite frames in spritesheet, sets back to 1
         if(animFrame < maxAnimFrame){
@@ -199,23 +189,20 @@ public abstract class Entity {
     }
     /**
      * sets the frameInterval of the Entity
-     * @param i
-     * @return null
+     * @param i new frameInterval
      */
     public void setFrameInterval(int i){
         frameInterval = i;
     }
     /**
      * increases the frameInterval of an Entity
-     * @return null
      */
     public void incFrameInterval(){
         frameInterval++;
     }
     /**
      * sets the value of the maxAnimFrame of an Entity
-     * @param mf
-     * @return null
+     * @param mf new maxAnimFrame 
      */
     public void setMaxAnimFrame(int mf){
         maxAnimFrame = mf;
@@ -257,25 +244,22 @@ public abstract class Entity {
     }
     /**
      * sets an Entity's absoluteX value
-     * @param x
-     * @return null
+     * @param x new absoluteX
      */
     public void setAbsoluteX(int x){
         absoluteX = x;
     }
     /**
      * sets an Entity's absoluteY value
-     * @param y
-     * @return null
+     * @param y new absoluteY
      */
     public void setAbsoluteY(int y){
         absoluteY = y;
     }
     /**
      * sets an Entity's absolute coordinate values
-     * @param x
-     * @param y
-     * @return null
+     * @param x new absoluteX
+     * @param y new absoluteY
      */
     public void setAbsoluteCoords(int y, int x){
         absoluteY = y;

@@ -32,11 +32,11 @@ public abstract class Plant extends Entity{
     
     /**
      * constructor method for Plant
-     * @param h
-     * @param c
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param h hit points for Plant
+     * @param c sun cost of Plant
+     * @param sw sprite width of Plant
+     * @param sh sprite height of Plant
+     * @param maxF max animation frames of Plant
      */
     public Plant(int h, int c, int sw, int sh, int maxF){
         super(0, sw, sh, maxF);
@@ -45,12 +45,12 @@ public abstract class Plant extends Entity{
     }
     /**
      * constructor method for Plant
-     * @param h
-     * @param c
-     * @param f
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param h hit points of Plant
+     * @param c sun cost of Plant
+     * @param f image file name for Plant sprite
+     * @param sw sprite width of Plant
+     * @param sh sprite height of Plant
+     * @param maxF max animation frame of Plant
      */
     public Plant(int h, int c, String f, int sw, int sh, int maxF){
         super(0, f, sw, sh, maxF);
@@ -60,32 +60,28 @@ public abstract class Plant extends Entity{
         
     /**
      * sets the hp of a Plant
-     * @param h
-     * @return null
+     * @param h new hp of Plant
      */
     public void setHP(int h){
         hp = h;
     }    
     /**
      * sets the sunCost of a Plant
-     * @param c
-     * @return null
+     * @param c new sunCost of Plant
      */
     public void setSunCost(int c){
         sunCost = c;
     }
     /**
      * sets the sun value
-     * @param s
-     * @return null
+     * @param s new sun value
      */
     public void setSun(int s){
         sun = s;
     }
     /**
      * adds a Plant to usedPlants arrayList
-     * @param p
-     * @return null
+     * @param p Plant to add
      */
     public static void addUsedPlants(Plant p){
         usedPlants.add(p);
