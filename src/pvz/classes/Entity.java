@@ -12,21 +12,25 @@ import pvz.screens.GamePanel;
 /**
  *
  * @author Julian Zafra
+ * this class creates an instance of an Entity which can be a Plant, Projectile, or Zombie
  */
 public abstract class Entity {
     /**
-     * this class creates an instance of an Entity which can be a Plant, Projectile, or Zombie
+     * refers to pixel by pixel measurement 
      */
-    
+    private int absoluteX;
     /**
-     * int values referring to pixel by pixel measurements
-     * absoluteY and yCoord are very similar 
+     * similar to yCoord
      */
-    private int absoluteX, absoluteY;
+    private int absoluteY;
     /**
-     * refers to the coordinates of an Entity with respect to the grid
+     * refers to the x coordinate of an Entity with respect to the grid
      */
-    protected int xCoord, yCoord;
+    protected int xCoord;
+    /**
+     * refers to the y coordinate of an Entity with respect to the grid
+     */
+    protected int yCoord;
     /**
      * refers to the speed at which Entity traverses the grid
      */
@@ -42,9 +46,12 @@ public abstract class Entity {
      */
     protected SpriteSheet spriteSheet;
     /**
-     * the following set the height and width of the Entity sprites
+     * the width of the Entity's sprites
      */
     protected int spriteWidth;
+    /**
+     * the height of the Entity's sprites
+     */
     protected int spriteHeight;
     /**
      * max sprites in a spritesheet 
@@ -64,7 +71,11 @@ public abstract class Entity {
     private static GamePanel gamePanel;
     
     /**
-     * constructor methods for Entity
+     * constructor method for Entity
+     * @param s
+     * @param sw
+     * @param sh
+     * @param maxF 
      */
     public Entity(double s, int sw, int sh, int maxF){
         speed = s;
@@ -75,6 +86,14 @@ public abstract class Entity {
         frameInterval = 0;
     }
     
+    /**
+     * constructor method for Entity
+     * @param s
+     * @param f
+     * @param sw
+     * @param sh
+     * @param maxF 
+     */
     public Entity(double s, String f, int sw, int sh, int maxF){
         speed = s;
         imgFilename = f;
@@ -117,7 +136,8 @@ public abstract class Entity {
     }
     /**
      * sets the x and y coordinates of an Entity
-     * @param x, y
+     * @param x
+     * @param y
      * @return null
      */
     public void setCoords(int y, int x){
@@ -253,7 +273,8 @@ public abstract class Entity {
     }
     /**
      * sets an Entity's absolute coordinate values
-     * @param x, y
+     * @param x
+     * @param y
      * @return null
      */
     public void setAbsoluteCoords(int y, int x){

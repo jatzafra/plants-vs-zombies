@@ -10,12 +10,9 @@ import java.util.ArrayList;
 /**
  *
  * @author Bella Buyco
+ * this class creates an instance of an Entity called a Plant
  */
 public abstract class Plant extends Entity{
-    /**
-     * this class creates an instance of an Entity called a Plant
-     */
-    
     /**
      * an int referring to how much health or hp the Plant has
      */
@@ -33,16 +30,28 @@ public abstract class Plant extends Entity{
      */
     protected static ArrayList<Plant> usedPlants = new ArrayList<>();
     
-    
     /**
-     * constructor methods for Plant
+     * constructor method for Plant
+     * @param h
+     * @param c
+     * @param sw
+     * @param sh
+     * @param maxF 
      */
-    
     public Plant(int h, int c, int sw, int sh, int maxF){
         super(0, sw, sh, maxF);
         hp = h;
         sunCost = c;
     }
+    /**
+     * constructor method for Plant
+     * @param h
+     * @param c
+     * @param f
+     * @param sw
+     * @param sh
+     * @param maxF 
+     */
     public Plant(int h, int c, String f, int sw, int sh, int maxF){
         super(0, f, sw, sh, maxF);
         hp = h;

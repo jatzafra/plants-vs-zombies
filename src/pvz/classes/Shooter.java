@@ -14,12 +14,9 @@ import pvz.controllers.GameController;
 /**
  *
  * @author Bella Buyco
+ * this class creates a Shooter type of Plant
  */
 public class Shooter extends Plant{
-    /**
-     * this class creates a Shooter type of Plant
-     */
-    
     /**
      * refers to the type of Shooter it is (lobbed or straight)
      */
@@ -38,12 +35,28 @@ public class Shooter extends Plant{
     private int shootInterval = 0;
     
     /**
-     * constructor methods for Shooter class
+     * constructor method for Shooter
+     * @param h
+     * @param c
+     * @param t
+     * @param sw
+     * @param sh
+     * @param maxF 
      */
     public Shooter(int h, int c, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
         type = t;
     }
+    /**
+     * constructor method for Shooter
+     * @param h
+     * @param c
+     * @param t
+     * @param f
+     * @param sw
+     * @param sh
+     * @param maxF 
+     */
     public Shooter(int h, int c, String t, String f, int sw, int sh, int maxF){
         super(h, c, f, sw, sh, maxF);
         type = t;
