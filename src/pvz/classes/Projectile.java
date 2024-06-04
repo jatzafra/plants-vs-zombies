@@ -44,9 +44,9 @@ public class Projectile extends Entity {
     
     /**
      * constructor method for Projectile
-     * @param s
-     * @param a
-     * @param t 
+     * @param s Projectile speed
+     * @param a Projectile attack
+     * @param t Projectile type
      */
     public Projectile(double s, int a, String t){
         super(s, "../imgs/wireframe.jpg", 25, 25, 1);
@@ -55,13 +55,13 @@ public class Projectile extends Entity {
     }
     /**
      * constructor method for Projectile
-     * @param s
-     * @param a
-     * @param t
-     * @param f
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param s Projectile speed
+     * @param a Projectile attack
+     * @param t Projectile type
+     * @param f img file name for Projectile sprite
+     * @param sw Projectile sprite width 
+     * @param sh Projectile sprite 
+     * @param maxF max animation frames for Sprite
      */
     public Projectile(double s, int a, String t, String f, int sw, int sh, int maxF){
         super(s, f, sw, sh, maxF);
@@ -92,7 +92,7 @@ public class Projectile extends Entity {
     }
     /**
      * sets the Projectile Attack
-     * @param l
+     * @param l new Label
      * @return null
      */
     public void setProjectileLabel(JLabel l){
@@ -100,7 +100,7 @@ public class Projectile extends Entity {
     }
     /**
      * sets the moveInterval
-     * @param i
+     * @param i new moveInterval value
      */
     public void setMoveInterval(int i){
         moveInterval = i;
@@ -121,7 +121,7 @@ public class Projectile extends Entity {
     }
     /**
      * adds a Projectile to usedProjectiles
-     * @param p 
+     * @param p  Projectile to add to usedProjectiles
      * @return null
      */
     public static void addUsedProjectiles(Projectile p){

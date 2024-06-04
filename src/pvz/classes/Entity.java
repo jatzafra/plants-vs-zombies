@@ -72,10 +72,10 @@ public abstract class Entity {
     
     /**
      * constructor method for Entity
-     * @param s
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param s speed of Entity
+     * @param sw sprite width of Entity
+     * @param sh sprite height of Entity
+     * @param maxF max animation frames of Entity
      */
     public Entity(double s, int sw, int sh, int maxF){
         speed = s;
@@ -88,11 +88,11 @@ public abstract class Entity {
     
     /**
      * constructor method for Entity
-     * @param s
-     * @param f
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param s speed of Entity
+     * @param f image file name for Entity's sprites
+     * @param sw sprite width of Entity
+     * @param sh sprite height of Entity
+     * @param maxF max animation frames of Entity
      */
     public Entity(double s, String f, int sw, int sh, int maxF){
         speed = s;
@@ -120,7 +120,7 @@ public abstract class Entity {
     }
     /**
      * sets the x coordinate of the Entity
-     * @param x
+     * @param x new x coordinate
      * @return null
      */
     public void setX(int x){
@@ -128,7 +128,7 @@ public abstract class Entity {
     }
     /**
      * sets the y coordinate of the Entity
-     * @param y
+     * @param y new y coordinate
      * @return null
      */
     public void setY(int y){
@@ -136,8 +136,8 @@ public abstract class Entity {
     }
     /**
      * sets the x and y coordinates of an Entity
-     * @param x
-     * @param y
+     * @param x new xCoord
+     * @param y new yCoord
      * @return null
      */
     public void setCoords(int y, int x){
@@ -146,7 +146,7 @@ public abstract class Entity {
     }
     /**
      * sets the speed of the Entity
-     * @param s
+     * @param s new speed
      * @return null
      */
     public void setSpeed(int s){
@@ -154,7 +154,7 @@ public abstract class Entity {
     }
     /**
      * sets the SpriteSheet of the Entity
-     * @param s
+     * @param s new SpriteSheet
      * @return null
      */
     public void setSpriteSheet(SpriteSheet s){
@@ -162,7 +162,7 @@ public abstract class Entity {
     }
     /**
      * sets the width of the Entity's sprite
-     * @param w
+     * @param w new width
      * @return null
      */
     public void setSpriteWidth(int w){
@@ -170,7 +170,7 @@ public abstract class Entity {
     }
     /**
      * sets the height of the Entity's sprite
-     * @param h
+     * @param h new height
      * @return null
      */
     public void setSpriteHeight(int h){
@@ -178,7 +178,7 @@ public abstract class Entity {
     }
     /**
      * sets the animation frame of the Entity
-     * @param f
+     * @param f new animation frame
      * @return null
      */
     public void setAnimFrame(int f){
@@ -199,7 +199,7 @@ public abstract class Entity {
     }
     /**
      * sets the frameInterval of the Entity
-     * @param i
+     * @param i new frameInterval
      * @return null
      */
     public void setFrameInterval(int i){
@@ -214,7 +214,7 @@ public abstract class Entity {
     }
     /**
      * sets the value of the maxAnimFrame of an Entity
-     * @param mf
+     * @param mf new maxAnimFrame 
      * @return null
      */
     public void setMaxAnimFrame(int mf){
@@ -257,7 +257,7 @@ public abstract class Entity {
     }
     /**
      * sets an Entity's absoluteX value
-     * @param x
+     * @param x new absoluteX
      * @return null
      */
     public void setAbsoluteX(int x){
@@ -265,7 +265,7 @@ public abstract class Entity {
     }
     /**
      * sets an Entity's absoluteY value
-     * @param y
+     * @param y new absoluteY
      * @return null
      */
     public void setAbsoluteY(int y){
@@ -273,8 +273,8 @@ public abstract class Entity {
     }
     /**
      * sets an Entity's absolute coordinate values
-     * @param x
-     * @param y
+     * @param x new absoluteX
+     * @param y new absoluteY
      * @return null
      */
     public void setAbsoluteCoords(int y, int x){

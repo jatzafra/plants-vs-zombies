@@ -36,12 +36,12 @@ public class Shooter extends Plant{
     
     /**
      * constructor method for Shooter
-     * @param h
-     * @param c
-     * @param t
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param h hit points of Shooter
+     * @param c sun cost of Shooter
+     * @param t type of Shooter
+     * @param sw sprite width of Shooter
+     * @param sh sprite height of Shooter
+     * @param maxF max animation frames of Shooter
      */
     public Shooter(int h, int c, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
@@ -49,13 +49,13 @@ public class Shooter extends Plant{
     }
     /**
      * constructor method for Shooter
-     * @param h
-     * @param c
-     * @param t
-     * @param f
-     * @param sw
-     * @param sh
-     * @param maxF 
+     * @param h hit points of Shooter
+     * @param c sun cost of Shooter
+     * @param t type of Shooter
+     * @param f image file name for Shooter sprite
+     * @param sw sprite width of Shooter
+     * @param sh sprite height of Shooter
+     * @param maxF max animation frames of Shooter
      */
     public Shooter(int h, int c, String t, String f, int sw, int sh, int maxF){
         super(h, c, f, sw, sh, maxF);
@@ -124,7 +124,7 @@ public class Shooter extends Plant{
     }
     /**
      * sets the shootInterval
-     * @param i 
+     * @param i new shootInterval
      */
     public void setShootInterval(int i){
         shootInterval = i;
