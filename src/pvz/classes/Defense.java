@@ -11,7 +11,13 @@ import pvz.classes.Plant;
  * @author Bella Buyco
  */
 public class Defense extends Plant{
+    /**
+     * a class that creates an instance of a Defense type of Plant
+     */
     
+    /**
+     * constructor methods for the Defense class
+     */
     public Defense(int h, int c, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
     }

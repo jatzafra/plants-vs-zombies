@@ -50,7 +50,7 @@ public class CreditsPanel extends JPanel implements ActionListener{
         boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
         
         credits = new JLabel();
-        credits.setText("made by badong buyco zafra");
+        credits.setText("By Badong, Buyco, and Zafra");
         credits.setFont(new Font("Dialog", Font.PLAIN, 50));
         credits.setAlignmentX(JLabel.CENTER_ALIGNMENT);
        
