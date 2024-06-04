@@ -14,14 +14,39 @@ import pvz.classes.Zombie;
  * @author Bella Buyco
  */
 public class Projectile extends Entity {
+    /**
+     * this class creates an Entity called a Projectile used to damage Zombies
+     */
+    
+    /**
+     * specifies what type of Projectile it is (lobbed or straight)
+     */
     private String type;
+    /**
+     * how much damage it deals to Zombies
+     */
     private int attack;
+    /**
+     * what Entity it is attacking
+     */
     private Entity target;
+    /**
+     * label containing the projectile's ImageIcon
+     */
     private JLabel projectileLabel;
+    /**
+     * amount of updates before an object is moved
+     */
     private int moveInterval;
+    /**
+     * an arrayList containing used projectiles
+     */
     protected static ArrayList<Projectile> usedProjectiles = new ArrayList<>();
     
     // - - - - - - - *TEMPORARY* - - - - - - - 
+    /**
+     * constructor methods for Projectile
+     */
     public Projectile(double s, int a, String t){
         super(s, "../imgs/wireframe.jpg", 25, 25, 1);
         attack = a;
@@ -34,36 +59,76 @@ public class Projectile extends Entity {
         type = t;
     }
     
+    /**
+     * gets the Projectile Type
+     * @return type
+     */
     public String getType(){
         return type;
     }
+    /**
+     * gets the Projectile Attack
+     * @return attack
+     */
     public int getAttack(){
         return attack;
     }
-    
+    /**
+     * gets the Projectile Label
+     * @return projectileLabel
+     */
     public JLabel getProjectileLabel(){
         return projectileLabel;
     }
+    /**
+     * sets the Projectile Attack
+     * @param l
+     * @return null
+     */
     public void setProjectileLabel(JLabel l){
         projectileLabel = l;
     }
+    /**
+     * sets the moveInterval
+     * @param i
+     */
     public void setMoveInterval(int i){
         moveInterval = i;
     }
+    /**
+     * increases move interval
+     * @return null
+     */
     public void incMoveInterval(){
         moveInterval++;
     }
+    /**
+     * gets the move interval value
+     * @return moveInterval
+     */
     public int getMoveInterval(){
         return moveInterval;
     }
+    /**
+     * adds a Projectile to usedProjectiles
+     * @param p 
+     * @return null
+     */
     public static void addUsedProjectiles(Projectile p){
         usedProjectiles.add(p);
     }
-    
+    /**
+     * gets usedProjectiles arrayList
+     * @return usedProjectiles
+     */
     public static ArrayList getUsedProjectiles(){
         return usedProjectiles;
     }
     
+    /**
+     * allows Projectile to hit a Zombie
+     * @return null
+     */
     public void hit(){ 
 //        Zombie target = Tile.getFirstZombieInTile(xCoord, yCoord);
 //        

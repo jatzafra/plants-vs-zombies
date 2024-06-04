@@ -16,11 +16,30 @@ import pvz.controllers.GameController;
  * @author Bella Buyco
  */
 public class Shooter extends Plant{
+    /**
+     * this class creates a Shooter type of Plant
+     */
+    
+    /**
+     * refers to the type of Shooter it is (lobbed or straight)
+     */
     private String type;
+    /**
+     * static projectile counter set to 0
+     */
     private static int projectileCounter = 0;
+    /**
+     * creates a game controller
+     */
     private GameController controller;
+    /**
+     * interval between shots of Projectile set to 0
+     */
     private int shootInterval = 0;
     
+    /**
+     * constructor methods for Shooter class
+     */
     public Shooter(int h, int c, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
         type = t;
@@ -30,6 +49,10 @@ public class Shooter extends Plant{
         type = t;
     }
     
+    /**
+     * allows the Shooter Plant to shoot at nearest Zombie in its row
+     * @return null
+     */
     public void shoot(){
         if(this.detect()){
             Projectile selectedProjectile = null;
@@ -59,6 +82,10 @@ public class Shooter extends Plant{
             selectedProjectile = null;
         }
     }
+    /**
+     * detects if there are nearby zombies in the row
+     * @return null
+     */
     public boolean detect(){
         for(Zombie z : Tile.getZombieList()){
             if(z.getAbsoluteX() >= this.getAbsoluteX() && z.getAbsoluteY() == this.getAbsoluteY()){
@@ -68,15 +95,30 @@ public class Shooter extends Plant{
         return false;
     }
     
+    /**
+     * gets the Shooter type
+     * @return type
+     */
     public String getType(){
         return type;
     }
+    /**
+     * gets the shootInterval
+     * @return shootInterval
+     */
     public int getShootInterval(){
         return shootInterval;
     }
+    /**
+     * sets the shootInterval
+     * @param i 
+     */
     public void setShootInterval(int i){
         shootInterval = i;
     }
+    /**
+     * increases the shootInterval
+     */
     public void incShootInterval(){
         shootInterval++;
     }
