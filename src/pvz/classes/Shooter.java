@@ -12,9 +12,8 @@ import javax.swing.JLabel;
 import pvz.controllers.GameController;
 
 /**
- *
- * @author Bella Buyco
  * this class creates a Shooter type of Plant
+ * @author Bella Buyco
  */
 public class Shooter extends Plant{
     /**

@@ -8,9 +8,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- *
- * @author Bella Buyco
  * this class creates an instance of an Entity called a Plant
+ * @author Bella Buyco
  */
 public abstract class Plant extends Entity{
     /**

@@ -10,9 +10,8 @@ import pvz.classes.Tile;
 import pvz.classes.Zombie;
 
 /**
- *
- * @author Bella Buyco
  * this class creates an Entity called a Projectile used to damage Zombies
+ * @author Bella Buyco
  */
 public class Projectile extends Entity {
     /**

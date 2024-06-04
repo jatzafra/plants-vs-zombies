@@ -5,16 +5,14 @@
 package pvz.classes;
 
 import pvz.classes.Plant;
-import pvz.classes.Tile;
-import pvz.classes.Zombie;
 
 /**
+ * a class that creates a Bomb type of Plant
  * @author Bella Buyco
- * a class that creates an instant of a Bomb type of Plant
  */
 public class Bomb extends Plant{
     /**
-     * refers to the type of Bomb it is (insta or requires chargeUp)
+     * refers to the type of Bomb it is (instant or requires chargeUp)
      */
     private String type;
     /**
