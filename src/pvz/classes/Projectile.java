@@ -93,7 +93,6 @@ public class Projectile extends Entity {
     /**
      * sets the Projectile Attack
      * @param l new Label
-     * @return null
      */
     public void setProjectileLabel(JLabel l){
         projectileLabel = l;
@@ -107,7 +106,6 @@ public class Projectile extends Entity {
     }
     /**
      * increases move interval
-     * @return null
      */
     public void incMoveInterval(){
         moveInterval++;
@@ -122,7 +120,6 @@ public class Projectile extends Entity {
     /**
      * adds a Projectile to usedProjectiles
      * @param p  Projectile to add to usedProjectiles
-     * @return null
      */
     public static void addUsedProjectiles(Projectile p){
         usedProjectiles.add(p);
@@ -137,7 +134,6 @@ public class Projectile extends Entity {
     
     /**
      * allows Projectile to hit a Zombie
-     * @return null
      */
     public void hit(){ 
 //        Zombie target = Tile.getFirstZombieInTile(xCoord, yCoord);

@@ -64,7 +64,6 @@ public class Shooter extends Plant{
     
     /**
      * allows the Shooter Plant to shoot at nearest Zombie in its row
-     * @return null
      */
     public void shoot(){
         if(this.detect()){
@@ -97,7 +96,6 @@ public class Shooter extends Plant{
     }
     /**
      * detects if there are nearby zombies in the row
-     * @return null
      */
     public boolean detect(){
         for(Zombie z : Tile.getZombieList()){

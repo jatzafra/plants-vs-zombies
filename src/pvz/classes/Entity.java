@@ -106,7 +106,6 @@ public abstract class Entity {
     
     /**
      * sets the gamePanel 
-     * @return null
      */
     public static void setGamePanel(GamePanel gp){
         gamePanel = gp;
@@ -121,7 +120,6 @@ public abstract class Entity {
     /**
      * sets the x coordinate of the Entity
      * @param x new x coordinate
-     * @return null
      */
     public void setX(int x){
         xCoord = x;
@@ -129,7 +127,6 @@ public abstract class Entity {
     /**
      * sets the y coordinate of the Entity
      * @param y new y coordinate
-     * @return null
      */
     public void setY(int y){
         yCoord = y;
@@ -138,7 +135,6 @@ public abstract class Entity {
      * sets the x and y coordinates of an Entity
      * @param x new xCoord
      * @param y new yCoord
-     * @return null
      */
     public void setCoords(int y, int x){
         xCoord = x;
@@ -147,7 +143,6 @@ public abstract class Entity {
     /**
      * sets the speed of the Entity
      * @param s new speed
-     * @return null
      */
     public void setSpeed(int s){
         speed = s;
@@ -155,7 +150,6 @@ public abstract class Entity {
     /**
      * sets the SpriteSheet of the Entity
      * @param s new SpriteSheet
-     * @return null
      */
     public void setSpriteSheet(SpriteSheet s){
         spriteSheet = s;
@@ -163,7 +157,6 @@ public abstract class Entity {
     /**
      * sets the width of the Entity's sprite
      * @param w new width
-     * @return null
      */
     public void setSpriteWidth(int w){
         spriteWidth = w;
@@ -171,7 +164,6 @@ public abstract class Entity {
     /**
      * sets the height of the Entity's sprite
      * @param h new height
-     * @return null
      */
     public void setSpriteHeight(int h){
         spriteWidth = h;
@@ -179,7 +171,6 @@ public abstract class Entity {
     /**
      * sets the animation frame of the Entity
      * @param f new animation frame
-     * @return null
      */
     public void setAnimFrame(int f){
         animFrame = f;
@@ -187,7 +178,6 @@ public abstract class Entity {
     /**
      * increases the animation frame of the Entity if it is less than the max animation frame
      * else, the animation frame will be = 1
-     * @return null
      */
     public void incAnimFrame(){ // when greater than or equal to max sprite frames in spritesheet, sets back to 1
         if(animFrame < maxAnimFrame){
@@ -200,14 +190,12 @@ public abstract class Entity {
     /**
      * sets the frameInterval of the Entity
      * @param i new frameInterval
-     * @return null
      */
     public void setFrameInterval(int i){
         frameInterval = i;
     }
     /**
      * increases the frameInterval of an Entity
-     * @return null
      */
     public void incFrameInterval(){
         frameInterval++;
@@ -215,7 +203,6 @@ public abstract class Entity {
     /**
      * sets the value of the maxAnimFrame of an Entity
      * @param mf new maxAnimFrame 
-     * @return null
      */
     public void setMaxAnimFrame(int mf){
         maxAnimFrame = mf;
@@ -258,7 +245,6 @@ public abstract class Entity {
     /**
      * sets an Entity's absoluteX value
      * @param x new absoluteX
-     * @return null
      */
     public void setAbsoluteX(int x){
         absoluteX = x;
@@ -266,7 +252,6 @@ public abstract class Entity {
     /**
      * sets an Entity's absoluteY value
      * @param y new absoluteY
-     * @return null
      */
     public void setAbsoluteY(int y){
         absoluteY = y;
@@ -275,7 +260,6 @@ public abstract class Entity {
      * sets an Entity's absolute coordinate values
      * @param x new absoluteX
      * @param y new absoluteY
-     * @return null
      */
     public void setAbsoluteCoords(int y, int x){
         absoluteY = y;

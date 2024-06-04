@@ -61,7 +61,6 @@ public abstract class Plant extends Entity{
     /**
      * sets the hp of a Plant
      * @param h new hp of Plant
-     * @return null
      */
     public void setHP(int h){
         hp = h;
@@ -69,7 +68,6 @@ public abstract class Plant extends Entity{
     /**
      * sets the sunCost of a Plant
      * @param c new sunCost of Plant
-     * @return null
      */
     public void setSunCost(int c){
         sunCost = c;
@@ -77,7 +75,6 @@ public abstract class Plant extends Entity{
     /**
      * sets the sun value
      * @param s new sun value
-     * @return null
      */
     public void setSun(int s){
         sun = s;
@@ -85,7 +82,6 @@ public abstract class Plant extends Entity{
     /**
      * adds a Plant to usedPlants arrayList
      * @param p Plant to add
-     * @return null
      */
     public static void addUsedPlants(Plant p){
         usedPlants.add(p);

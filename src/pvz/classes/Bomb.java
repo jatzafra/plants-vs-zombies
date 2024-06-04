@@ -65,7 +65,6 @@ public class Bomb extends Plant{
     
     /**
      * this method makes "active" true if the Bomb is an insta type or if there is a nearby Zombie
-     * @return null
      */
     public void activate(){
 //        if(Tile.getFirstZombieInTile(this.getX(), this.getY()) != null || type == "insta"){
@@ -75,7 +74,6 @@ public class Bomb extends Plant{
     
     /**
      * this method allows the Bomb to detonate and kill all zombies within a range if it is active
-     * @return null
      */
     public void explode(){ 
 //        if(active){
