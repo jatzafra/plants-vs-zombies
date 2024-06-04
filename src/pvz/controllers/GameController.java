@@ -27,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import pvz.classes.Projectile;
 import pvz.classes.SpriteSheet;
 import pvz.classes.Zombie;
 
@@ -72,7 +73,7 @@ public class GameController implements ActionListener, MouseListener{
             if(System.nanoTime() >= 2000000000.0 && test){
                 test = false;
                 Zombie z = (Zombie) Zombie.getUsedZombies().get(2);
-                Tile.addAbsoluteEntity(z, 0, 500);
+                Tile.addAbsoluteEntity(z, 1, 1100);
                 
                 newZombieSprite = z.getSpriteSheet();
                 BufferedImage grabbedImg = newZombieSprite.grabImage(1, 1, z.getSpriteWidth(), z.getSpriteHeight());
@@ -81,12 +82,12 @@ public class GameController implements ActionListener, MouseListener{
                 JLabel zLabel = new JLabel();
                 zLabel.setIcon(new ImageIcon(resizedImg));
                 z.setZombieLabel(zLabel);
-                rowList.get(z.getAbsoluteY() + 1).add(zLabel);
+                rowList.get(1).add(zLabel);
                 zLabel.setBounds(z.getAbsoluteX(), -47, 180, 250);
                 newZombieSprite = null;
                 
                 Zombie z1 = (Zombie) Zombie.getUsedZombies().get(1);
-                Tile.addAbsoluteEntity(z1, 0, 500);
+                Tile.addAbsoluteEntity(z1, 3, 1100);
                 
                 newZombieSprite = z1.getSpriteSheet();
                 BufferedImage grabbedImg1 = newZombieSprite.grabImage(1, 1, z1.getSpriteWidth(), z1.getSpriteHeight());
@@ -95,12 +96,12 @@ public class GameController implements ActionListener, MouseListener{
                 JLabel zLabel1 = new JLabel();
                 zLabel1.setIcon(new ImageIcon(resizedImg1));
                 z1.setZombieLabel(zLabel1);
-                rowList.get(z.getAbsoluteY() + 2).add(zLabel1);
-                zLabel1.setBounds(z.getAbsoluteX(), -47, 180, 250);
+                rowList.get(3).add(zLabel1);
+                zLabel1.setBounds(z1.getAbsoluteX(), -47, 180, 250);
                 newZombieSprite = null;
                 
                 Zombie z2 = (Zombie) Zombie.getUsedZombies().get(0);
-                Tile.addAbsoluteEntity(z2, 0, 500);
+                Tile.addAbsoluteEntity(z2, 2, 1100);
                 
                 newZombieSprite = z2.getSpriteSheet();
                 BufferedImage grabbedImg2 = newZombieSprite.grabImage(1, 1, z.getSpriteWidth(), z.getSpriteHeight());
@@ -109,8 +110,8 @@ public class GameController implements ActionListener, MouseListener{
                 JLabel zLabel2 = new JLabel();
                 zLabel2.setIcon(new ImageIcon(resizedImg2));
                 z2.setZombieLabel(zLabel2);
-                rowList.get(z.getAbsoluteY() + 3).add(zLabel2);
-                zLabel2.setBounds(z.getAbsoluteX(), -47, 180, 250);
+                rowList.get(2).add(zLabel2);
+                zLabel2.setBounds(z2.getAbsoluteX(), -47, 180, 250);
                 newZombieSprite = null;
             }
             if(System.nanoTime() - lastUpdate >= timePerUpdate){
@@ -143,12 +144,46 @@ public class GameController implements ActionListener, MouseListener{
                 label.setIcon(new ImageIcon(resizedImg));
                 label.repaint();
                 
+                System.out.println("y: " + newPlant.getAbsoluteY() + " x: " + newPlant.getAbsoluteX());
+                
                 newPlant = null;
                 selectedX = -1; selectedY = -1;
             }
         }
         for(Zombie z : Tile.getZombieList()){
+            int maxMoveInterval = 30;
             
+            if(z.getMoveInterval() < maxMoveInterval){
+                z.incMoveInterval();
+            } else{
+                z.setMoveInterval(0);
+                int moveBy = (int) (110 / (z.getSpeed() * 2));
+                z.setAbsoluteX(z.getAbsoluteX() + moveBy);
+            }
+        }
+        for(Projectile pr : Tile.getProjectileList()){
+            int maxMoveInterval = 6;
+            
+            if(pr.getMoveInterval() < maxMoveInterval){
+                pr.incMoveInterval();
+            } else{
+                pr.setMoveInterval(0);
+                int moveBy = (int) (110 / pr.getSpeed() / 20);
+                pr.setAbsoluteX(pr.getAbsoluteX() + moveBy);
+            }
+        }
+        for(Plant p : Tile.getPlantList()){
+            if(p instanceof Shooter){
+                Shooter s = (Shooter) p;
+                int maxShootInterval = 90;
+                
+                if(s.getShootInterval() < maxShootInterval){
+                    s.incShootInterval();
+                } else{
+                    s.setShootInterval(0);
+                    s.shoot();
+                }
+            }
         }
     }
     public void nextFrame(){
@@ -188,6 +223,24 @@ public class GameController implements ActionListener, MouseListener{
                 ImageIcon img = new ImageIcon(resizedImg);
                 JLabel label = z.getZombieLabel();
                 label.setIcon(img);
+                label.setBounds(z.getAbsoluteX(),-47, 180, 250);
+            }
+        }
+        for(Projectile pr : Tile.getProjectileList()){
+            int maxFrameInterval = 6;
+            
+            if(pr.getFrameInterval() < maxFrameInterval){
+                pr.incFrameInterval();
+            } else{
+                pr.setFrameInterval(0);
+                pr.incAnimFrame();
+                
+                BufferedImage grabbedImg = pr.getSpriteSheet().grabImage(pr.getAnimFrame(), 1, pr.getSpriteWidth(), pr.getSpriteHeight());
+                BufferedImage resizedImg = pr.getSpriteSheet().resizeImage(60, 33,grabbedImg);
+                ImageIcon img = new ImageIcon(resizedImg);
+                JLabel label = pr.getProjectileLabel();
+                label.setIcon(img);
+                label.setBounds(pr.getAbsoluteX(), 75, 60, 33);
             }
         }
     }
@@ -212,6 +265,14 @@ public class GameController implements ActionListener, MouseListener{
             rowList.get(z.getAbsoluteY()).remove(label);
         }
         
+    }
+    
+    
+    public ArrayList getRowList(){
+        return rowList;
+    }
+    public void addToRowList(int y, JLabel l){
+        rowList.get(y).add(l);
     }
     
     public void setUnpaused(boolean u){

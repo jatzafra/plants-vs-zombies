@@ -43,6 +43,7 @@ public class Tile {
             tileArray[y][x] = e;
             
             e.setCoords(y, x);
+            e.setAbsoluteCoords(y, x*110+50); //xCoord keeping in mind where a projectile spawns
             
             if(e instanceof Plant){
                 plantList.add((Plant) e);
@@ -59,6 +60,7 @@ public class Tile {
                 tileArray[y][x] = null;
                 
                 e.setCoords(-1, -1); // Signifies that Entity e is removed from tileArray entirely
+                e.setAbsoluteCoords(-1000, -1000);
                 
                 if(e instanceof Plant){
                     plantList.remove((Plant) e);
@@ -74,6 +76,7 @@ public class Tile {
                 tileArray[y][x] = null;
                 
                 e.setCoords(-1, -1); // Signifies that Entity e is removed from tileArray entirely
+                e.setAbsoluteCoords(-1000, -1000);
                 
                 if(e instanceof Plant){
                     plantList.remove((Plant) e);

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import pvz.classes.BufferedImageLoader;
+import pvz.classes.Entity;
 import pvz.controllers.ResetGameListener;
 
 /**
@@ -36,8 +37,6 @@ public class Frame extends JFrame {
         this.setSize(1400, 832); //800 + 32 from title bar
         this.setPreferredSize(new Dimension(1400, 832));
         this.setLocationRelativeTo(null);
-//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        this.setUndecorated(true);
         this.getContentPane().setLayout(new CardLayout());
         
         menuPanel = new MenuPanel(this);
@@ -60,6 +59,8 @@ public class Frame extends JFrame {
         
         menuPanel.getController().setGameController(gamePanel.getController());
         pausePanel.getController().setGameController(gamePanel.getController());
+        
+        Entity.setGamePanel(gamePanel);
         
         this.setVisible(true);
 //        
