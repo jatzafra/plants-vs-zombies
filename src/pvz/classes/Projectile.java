@@ -12,12 +12,9 @@ import pvz.classes.Zombie;
 /**
  *
  * @author Bella Buyco
+ * this class creates an Entity called a Projectile used to damage Zombies
  */
 public class Projectile extends Entity {
-    /**
-     * this class creates an Entity called a Projectile used to damage Zombies
-     */
-    
     /**
      * specifies what type of Projectile it is (lobbed or straight)
      */
@@ -44,15 +41,28 @@ public class Projectile extends Entity {
     protected static ArrayList<Projectile> usedProjectiles = new ArrayList<>();
     
     // - - - - - - - *TEMPORARY* - - - - - - - 
+    
     /**
-     * constructor methods for Projectile
+     * constructor method for Projectile
+     * @param s
+     * @param a
+     * @param t 
      */
     public Projectile(double s, int a, String t){
         super(s, "../imgs/wireframe.jpg", 25, 25, 1);
         attack = a;
         type = t;
     }
-    
+    /**
+     * constructor method for Projectile
+     * @param s
+     * @param a
+     * @param t
+     * @param f
+     * @param sw
+     * @param sh
+     * @param maxF 
+     */
     public Projectile(double s, int a, String t, String f, int sw, int sh, int maxF){
         super(s, f, sw, sh, maxF);
         attack = a;

@@ -10,12 +10,9 @@ import pvz.classes.Zombie;
 
 /**
  * @author Bella Buyco
+ * a class that creates an instant of a Bomb type of Plant
  */
 public class Bomb extends Plant{
-    /**
-     * a class that creates an instant of a Bomb type of Plant
-     */
-    
     /**
      * refers to the type of Bomb it is (insta or requires chargeUp)
      */
@@ -30,7 +27,7 @@ public class Bomb extends Plant{
     private boolean active;
     
     /**
-     * constructor methods for the Bomb class
+     * constructor method for the Bomb class
      */
     public Bomb(int h, int c, int u, boolean a, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
@@ -38,6 +35,9 @@ public class Bomb extends Plant{
         active = a;
         type = t;
     }
+    /**
+     * constructor method for the Bomb class
+     */
     public Bomb(int h, int c, int u, boolean a, String t, String f, int sw, int sh, int maxF){
         super(h, c, f, sw, sh, maxF);
         chargeUp = u;
