@@ -4,6 +4,7 @@
  */
 package pvz.classes;
 
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import pvz.classes.Tile;
 import pvz.classes.Zombie;
@@ -13,46 +14,54 @@ import pvz.classes.Zombie;
  * @author Bella Buyco
  */
 public class Projectile extends Entity {
-    private int absoluteX, absoluteY;
     private String type;
-    private int atk;
+    private int attack;
     private Entity target;
     private JLabel projectileLabel;
+    private int moveInterval;
+    protected static ArrayList<Projectile> usedProjectiles = new ArrayList<>();
     
     // - - - - - - - *TEMPORARY* - - - - - - - 
-    public Projectile(float s, int a, String t){
+    public Projectile(double s, int a, String t){
         super(s, "../imgs/wireframe.jpg", 25, 25, 1);
-        atk = a;
+        attack = a;
         type = t;
     }
     
-    public Projectile(float s, int a, String t, String f, int sw, int sh, int maxF){
+    public Projectile(double s, int a, String t, String f, int sw, int sh, int maxF){
         super(s, f, sw, sh, maxF);
-        atk = a;
+        attack = a;
         type = t;
     }
     
-    public int getAbsoluteX(){
-        return absoluteX;
+    public String getType(){
+        return type;
     }
-    public int getAbsoluteY(){
-        return absoluteY;
+    public int getAttack(){
+        return attack;
     }
-    public void setAbsoluteX(int x){
-        absoluteX = x;
-    }
-    public void setAbsoluteY(int y){
-        absoluteY = y;
-    }
-    public void setAbsoluteCoords(int y, int x){
-        absoluteY = y;
-        absoluteX = x;
-    }
+    
     public JLabel getProjectileLabel(){
         return projectileLabel;
     }
     public void setProjectileLabel(JLabel l){
         projectileLabel = l;
+    }
+    public void setMoveInterval(int i){
+        moveInterval = i;
+    }
+    public void incMoveInterval(){
+        moveInterval++;
+    }
+    public int getMoveInterval(){
+        return moveInterval;
+    }
+    public static void addUsedProjectiles(Projectile p){
+        usedProjectiles.add(p);
+    }
+    
+    public static ArrayList getUsedProjectiles(){
+        return usedProjectiles;
     }
     
     public void hit(){ 

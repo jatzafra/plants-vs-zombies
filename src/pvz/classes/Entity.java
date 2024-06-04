@@ -7,12 +7,14 @@ package pvz.classes;
 import pvz.classes.Tile;
 import pvz.classes.Zombie;
 import pvz.exceptions.GameOverException;
+import pvz.screens.GamePanel;
 
 /**
  *
  * @author Lenovo
  */
 public abstract class Entity {
+    private int absoluteX, absoluteY;
     protected int xCoord, yCoord;
     protected double speed; // squares per second (has direction [+/-])
 //    protected String id;
@@ -23,8 +25,9 @@ public abstract class Entity {
     protected int maxAnimFrame;
     protected int animFrame;
     protected int frameInterval; // contains frames elapsed after animFrame is updated
+    private static GamePanel gamePanel;
     
-    public Entity(float s, int sw, int sh, int maxF){
+    public Entity(double s, int sw, int sh, int maxF){
         speed = s;
         spriteWidth = sw;
         spriteHeight = sh;
@@ -33,7 +36,7 @@ public abstract class Entity {
         frameInterval = 0;
     }
     
-    public Entity(float s, String f, int sw, int sh, int maxF){
+    public Entity(double s, String f, int sw, int sh, int maxF){
         speed = s;
         imgFilename = f;
         spriteWidth = sw;
@@ -43,6 +46,12 @@ public abstract class Entity {
         frameInterval = 0;
     }
     
+    public static void setGamePanel(GamePanel gp){
+        gamePanel = gp;
+    }
+    public static GamePanel getGamePanel(){
+        return gamePanel;
+    }
     public void setX(int x){
         xCoord = x;
     }
@@ -52,6 +61,9 @@ public abstract class Entity {
     public void setCoords(int y, int x){
         xCoord = x;
         yCoord = y;
+    }
+    public void setSpeed(int s){
+        speed = s;
     }
     public void setSpriteSheet(SpriteSheet s){
         spriteSheet = s;
@@ -83,11 +95,30 @@ public abstract class Entity {
         maxAnimFrame = mf;
     }
     
+    public double getSpeed(){
+        return speed;
+    }
     public int getX(){
         return xCoord;
     }
     public int getY(){
         return yCoord;
+    }
+    public int getAbsoluteX(){
+        return absoluteX;
+    }
+    public int getAbsoluteY(){
+        return absoluteY;
+    }
+    public void setAbsoluteX(int x){
+        absoluteX = x;
+    }
+    public void setAbsoluteY(int y){
+        absoluteY = y;
+    }
+    public void setAbsoluteCoords(int y, int x){
+        absoluteY = y;
+        absoluteX = x;
     }
     public String getImgFilename(){
         return imgFilename;

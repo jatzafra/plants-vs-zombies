@@ -4,8 +4,12 @@
  */
 package pvz.classes;
 
+import java.awt.image.BufferedImage;
 import pvz.classes.Tile;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import pvz.controllers.GameController;
 
 /**
  *
@@ -14,6 +18,8 @@ import java.util.List;
 public class Shooter extends Plant{
     private String type;
     private static int projectileCounter = 0;
+    private GameController controller;
+    private int shootInterval = 0;
     
     public Shooter(int h, int c, String t, int sw, int sh, int maxF){
         super(h, c, sw, sh, maxF);
@@ -25,16 +31,54 @@ public class Shooter extends Plant{
     }
     
     public void shoot(){
-//        //generate a projectile
-//        projectileCounter++;
-//        
-//        Projectile projectile = new Projectile(1, 10, type);
-//        Tile.addEntity(projectile, xCoord, yCoord);
-//        System.out.println("Shooter made Projectile."); //removable
+        if(this.detect()){
+            Projectile selectedProjectile = null;
+            if(this.getType() == "peashooter"){
+                selectedProjectile = (Projectile) Projectile.getUsedProjectiles().get(0);
+            }
+            
+            Projectile pr = new Projectile(selectedProjectile.getSpeed(), selectedProjectile.getAttack(), selectedProjectile.getType(), 
+                                           selectedProjectile.getImgFilename(), selectedProjectile.getSpriteWidth(), 
+                                           selectedProjectile.getSpriteHeight(), selectedProjectile.getMaxAnimFrame());
+            
+            pr.setSpriteSheet(selectedProjectile.getSpriteSheet());
+            Tile.addAbsoluteEntity(pr, this.getAbsoluteY(), this.getAbsoluteX());
+            
+            SpriteSheet newProjectileSprite = selectedProjectile.getSpriteSheet();
+            BufferedImage grabbedImg = newProjectileSprite.grabImage(1, 1, pr.getSpriteWidth(), pr.getSpriteHeight());
+            BufferedImage resizedImg = newProjectileSprite.resizeImage(60, 33,grabbedImg);
+
+            JLabel prLabel = new JLabel();
+            prLabel.setIcon(new ImageIcon(resizedImg));
+            pr.setProjectileLabel(prLabel);
+            Entity.getGamePanel().getController().addToRowList(pr.getAbsoluteY(), prLabel);
+            prLabel.setBounds(pr.getAbsoluteX() + 15, 75, 60, 33);
+            
+            newProjectileSprite = null;
+            
+            selectedProjectile = null;
+        }
+    }
+    public boolean detect(){
+        for(Zombie z : Tile.getZombieList()){
+            if(z.getAbsoluteX() >= this.getAbsoluteX() && z.getAbsoluteY() == this.getAbsoluteY()){
+                return true;
+            }
+        }
+        return false;
     }
     
     public String getType(){
         return type;
+    }
+    public int getShootInterval(){
+        return shootInterval;
+    }
+    public void setShootInterval(int i){
+        shootInterval = i;
+    }
+    public void incShootInterval(){
+        shootInterval++;
     }
     
 }

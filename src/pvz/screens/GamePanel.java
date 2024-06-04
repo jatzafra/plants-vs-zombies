@@ -101,8 +101,8 @@ public class GamePanel extends JPanel {
             JPanel entityPanel = new JPanel();
             entityPanel.setLayout(null);
             entityPanel.setOpaque(false);
-            entityPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            entityPanel.setBounds(5*y, 110*y, 1100, 167);
+//            entityPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            entityPanel.setBounds(0, 110*y, 1100, 167);
             
             rowList.add(entityPanel);
         }

@@ -12,48 +12,41 @@ import javax.swing.JLabel;
  * @author Lenovo
  */
 public class Zombie extends Entity {
-    private int absoluteX, absoluteY;
     private String type;
     private int hp;
     private int atk;
     private Plant target;
+    private int moveInterval;
     private JLabel zombieLabel;
     protected static ArrayList<Zombie> usedZombies = new ArrayList<>();
     
-    public Zombie(String t, int h, int a, float s, String f, int sw, int sh, int maxF){
+    public Zombie(String t, int h, int a, double s, String f, int sw, int sh, int maxF){
         super(s, f, sw, sh, maxF);
         type = t;
         hp = h;
         atk = a;
     }
     
-    public int getAbsoluteX(){
-        return absoluteX;
-    }
-    public int getAbsoluteY(){
-        return absoluteY;
-    }
-    public void setAbsoluteX(int x){
-        absoluteX = x;
-    }
-    public void setAbsoluteY(int y){
-        absoluteY = y;
-    }
-    public void setAbsoluteCoords(int y, int x){
-        absoluteY = y;
-        absoluteX = x;
-    }
     public JLabel getZombieLabel(){
         return zombieLabel;
     }
     public void setZombieLabel(JLabel l){
         zombieLabel = l;
     }
+    public void setMoveInterval(int i){
+        moveInterval = i;
+    }
+    public void incMoveInterval(){
+        moveInterval++;
+    }
     public int getHP(){
         return hp;
     }
     public void setHP(int h){
         hp = h;
+    }
+    public int getMoveInterval(){
+        return moveInterval;
     }
     
     public void targetPlant(){
