@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import pvz.classes.BufferedImageLoader;
+import pvz.controllers.BufferedImageLoader;
 import pvz.classes.Entity;
 import pvz.controllers.ResetGameListener;
 
