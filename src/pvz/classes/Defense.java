@@ -7,9 +7,8 @@ package pvz.classes;
 import pvz.classes.Plant;
 
 /**
- *
- * @author Bella Buyco
  * a class that creates an instance of a Defense type of Plant
+ * @author Bella Buyco
  */
 public class Defense extends Plant{
     /**

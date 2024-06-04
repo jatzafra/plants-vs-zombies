@@ -170,7 +170,7 @@ public class Tile {
     }
     /**
      * removes a Projectile from its containing ArrayLists
-     * sets Projectile's absolute coordinates to negative integers
+     * and sets Projectile's absolute coordinates to negative integers
      * @param p Projectile to be removed
      */
     public static void removeProjectile(Projectile p){
@@ -192,7 +192,7 @@ public class Tile {
     }
     /**
      * removes a Zombie from its containing ArrayLists
-     * sets Zombie's absolute coordinates to negative intergers
+     * and sets Zombie's absolute coordinates to negative intergers
      * @param z Zombie to be removed
      */
     public static void removeZombie(Zombie z){

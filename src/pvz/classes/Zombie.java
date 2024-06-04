@@ -37,8 +37,8 @@ public class Zombie extends Entity {
      */
     private JLabel zombieLabel;
     /**
-     * ArrayList containing zombies that will be used for a certain game
-     * new instances will have parameters copied from these zombies
+     * ArrayList containing zombies that will be used for a certain game.
+     * New instances will have parameters copied from these zombies
      */
     protected static ArrayList<Zombie> usedZombies = new ArrayList<>();
     

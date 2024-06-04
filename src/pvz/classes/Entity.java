@@ -4,15 +4,12 @@
  */
 package pvz.classes;
 
-import pvz.classes.Tile;
-import pvz.classes.Zombie;
 import pvz.exceptions.GameOverException;
 import pvz.screens.GamePanel;
 
 /**
- *
- * @author Julian Zafra
  * this class creates an instance of an Entity which can be a Plant, Projectile, or Zombie
+ * @author Julian Zafra
  */
 public abstract class Entity {
     /**
